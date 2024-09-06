@@ -10,9 +10,12 @@ const Home = () => {
             <h3>Front End Dev</h3>
           </section>
           <div
-            // className='w-fit'
+            // className='grid'
             style={{
-              width: 'fit-content(470px)'
+              width: 470,
+              maxWidth: 'fit-content'
+              // maxWidth: 470
+              // gridTemplateColumns: 'fit-content(470px)'
             }}
           >
             <LearnCoding />
