@@ -1,0 +1,16 @@
+.selfie {
+  max-width: 470px;
+}
+
+.category {
+  background-color: var(--background-color);
+}
+
+.category:hover {
+  background-color: var(--hovered-background-color);
+  color: var(--hovered-color);
+}
+
+.category:hover .tech-logo {
+  background-color: var(--hovered-color);
+}
