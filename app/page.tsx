@@ -7,8 +7,9 @@ import { Quote, Button, useTheme, Divider } from 'musae'
 import Box from '@/components/box'
 import { KeyboardArrowRight, KeyboardArrowDown, Github } from 'musae/icons'
 import { useCategories, useFooterLinks } from './hooks'
-import { createElement, CSSProperties } from 'react'
+import { createElement } from 'react'
 import { useRouter } from 'next/navigation'
+import CategoryCard from '@/components/category-card'
 
 const Home = () => {
   const { categories } = useCategories()
@@ -54,26 +55,9 @@ const Home = () => {
           <div className='grid grid-cols-5 gap-8 mt-12'>
             {categories.map((category) => {
               return (
-                <div
-                  key={category.label}
-                  className={clsx(
-                    'pl-7 pt-8 h-52 rounded-md hover:shadow-2xl transition-all cursor-pointer select-none',
-                    'flex flex-col gap-8',
-                    styles.category
-                  )}
-                  style={
-                    {
-                      '--background-color': theme.colors['surface-container-low'],
-                      '--hovered-background-color': theme.colors['primary'],
-                      '--hovered-color': theme.colors['on-primary']
-                    } as CSSProperties
-                  }
-                >
-                  <div className={clsx('p-3 transition-colors rounded-md w-fit', styles['tech-logo'])}>
-                    {createElement(category.render)}
-                  </div>
-                  <span className='text-2xl font-bold'>{category.label}</span>
-                </div>
+                <CategoryCard key={category.label} label={category.label}>
+                  {createElement(category.logo)}
+                </CategoryCard>
               )
             })}
           </div>

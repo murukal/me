@@ -3,7 +3,7 @@ import { GraphQL, JavaScript, NodeJS, React, Typescript } from '@/components/sta
 
 interface Category {
   label: string
-  render: FC
+  logo: FC
 }
 
 /**
@@ -15,24 +15,24 @@ export const useCategories = () => {
     return [
       {
         label: 'GraphQL',
-        render: GraphQL
+        logo: GraphQL
       },
 
       {
         label: 'JavaScript',
-        render: JavaScript
+        logo: JavaScript
       },
       {
         label: 'NodeJS',
-        render: NodeJS
+        logo: NodeJS
       },
       {
         label: 'React',
-        render: React
+        logo: React
       },
       {
         label: 'Typescript',
-        render: Typescript
+        logo: Typescript
       }
     ]
   }, [])
