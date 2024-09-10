@@ -10,6 +10,7 @@ import { useCategories, useFooterLinks } from './hooks'
 import { createElement } from 'react'
 import { useRouter } from 'next/navigation'
 import CategoryCard from '@/components/category-card'
+import ArticleCard from '@/components/article-card'
 
 const Home = () => {
   const { categories } = useCategories()
@@ -65,7 +66,9 @@ const Home = () => {
       </div>
 
       {/* articles */}
-      <div className='px-10'></div>
+      <div className='px-10'>
+        <ArticleCard />
+      </div>
 
       {/* footer */}
       <div className='px-10 pb-6 pt-14'>
