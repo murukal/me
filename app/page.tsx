@@ -18,8 +18,8 @@ const Home = () => {
   const footerLinks = useFooterLinks({ categories })
   const router = useRouter()
 
-  const toCategory = () => {
-    router.push('/category')
+  const toCategories = () => {
+    router.push('/categories')
   }
 
   return (
@@ -48,7 +48,7 @@ const Home = () => {
         <Box>
           <section className='flex justify-between items-center'>
             <h4 className='text-xl font-semibold'>Browse the category</h4>
-            <Button variant='text' suffix={<KeyboardArrowRight />} onClick={toCategory}>
+            <Button variant='text' suffix={<KeyboardArrowRight />} onClick={toCategories}>
               <span className='text-sm font-semibold'>See All Category</span>
             </Button>
           </section>
@@ -67,7 +67,22 @@ const Home = () => {
 
       {/* articles */}
       <div className='px-10'>
-        <ArticleCard />
+        <section className='flex justify-between items-center'>
+          <h4 className='text-xl font-semibold'>Featured articles</h4>
+          <Button variant='text' suffix={<KeyboardArrowRight />} onClick={toCategories}>
+            <span className='text-sm font-semibold'>See All Articles</span>
+          </Button>
+        </section>
+
+        <Box>
+          <div className='grid grid-cols-5 gap-8 mt-12'>
+            {Array.from<number>({ length: 5 })
+              .fill(0)
+              .map((index) => {
+                return <ArticleCard key={index} />
+              })}
+          </div>
+        </Box>
       </div>
 
       {/* footer */}
