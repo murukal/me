@@ -1,5 +1,6 @@
-import { FC, MouseEventHandler, useMemo } from 'react'
+import { FC, MouseEventHandler, useEffect, useMemo, useState } from 'react'
 import { GraphQL, JavaScript, NodeJS, React, Typescript } from '@/components/stack-logos'
+import { type Article } from '@/apis/article'
 
 interface Category {
   label: string
@@ -88,4 +89,30 @@ export const useFooterLinks = ({ categories }: { categories: Category[] }) => {
       }
     ]
   }, [categoryLinks])
+}
+
+/**
+ * @description
+ * articles
+ */
+export const useArticles = () => {
+  const [articles, setArticles] = useState<Article[]>([
+    {
+      id: 1,
+      title: '我写的第一篇文章',
+      content: '# 测试',
+      createdAt: 1321321321,
+      createdBy: {
+        avatar: '12321',
+        username: '12321'
+      }
+    }
+  ])
+
+  useEffect(() => {}, [])
+
+  return {
+    articles,
+    setArticles
+  }
 }

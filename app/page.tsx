@@ -6,7 +6,7 @@ import { clsx } from '@aiszlab/relax'
 import { Quote, Button, useTheme, Divider } from 'musae'
 import Box from '@/components/box'
 import { KeyboardArrowRight, KeyboardArrowDown, Github } from 'musae/icons'
-import { useCategories, useFooterLinks } from './hooks'
+import { useArticles, useCategories, useFooterLinks } from './hooks'
 import { createElement } from 'react'
 import { useRouter } from 'next/navigation'
 import CategoryCard from '@/components/category-card'
@@ -17,6 +17,7 @@ const Home = () => {
   const theme = useTheme()
   const footerLinks = useFooterLinks({ categories })
   const router = useRouter()
+  const { articles } = useArticles()
 
   const toCategories = () => {
     router.push('/categories')
@@ -76,11 +77,17 @@ const Home = () => {
 
         <Box>
           <div className='grid grid-cols-5 gap-8 mt-12'>
-            {Array.from<number>({ length: 5 })
-              .fill(0)
-              .map((index) => {
-                return <ArticleCard key={index} />
-              })}
+            {articles.map((article) => {
+              return (
+                <ArticleCard
+                  key={article.id}
+                  title={article.title}
+                  avatar={article.createdBy.avatar}
+                  createdAt={article.createdAt}
+                  username={article.createdBy.username}
+                />
+              )
+            })}
           </div>
         </Box>
       </div>

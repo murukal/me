@@ -2,6 +2,8 @@
 import { Bench, ConfigProvider, ThemeProvider } from 'musae'
 import type { ReactNode } from 'react'
 import Lamp from '@/components/lamp'
+import { client } from '@/apis'
+import { ApolloProvider } from '@apollo/client'
 
 interface Props {
   children: ReactNode
@@ -9,11 +11,13 @@ interface Props {
 
 const Provided = ({ children }: Props) => {
   return (
-    <ConfigProvider>
-      <ThemeProvider>
-        <Bench trailing={<Lamp />}>{children}</Bench>
-      </ThemeProvider>
-    </ConfigProvider>
+    <ApolloProvider client={client}>
+      <ConfigProvider>
+        <ThemeProvider>
+          <Bench trailing={<Lamp />}>{children}</Bench>
+        </ThemeProvider>
+      </ConfigProvider>
+    </ApolloProvider>
   )
 }
 
