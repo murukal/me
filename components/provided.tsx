@@ -2,7 +2,7 @@
 import { Bench, ConfigProvider, ThemeProvider } from 'musae'
 import type { ReactNode } from 'react'
 import Lamp from '@/components/lamp'
-import { client } from '@/apis'
+import { client } from '@/api'
 import { ApolloProvider } from '@apollo/client'
 
 interface Props {

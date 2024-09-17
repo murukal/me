@@ -1,6 +1,6 @@
 import { FC, MouseEventHandler, useEffect, useMemo, useState } from 'react'
 import { GraphQL, JavaScript, NodeJS, React, Typescript } from '@/components/stack-logos'
-import { type Article } from '@/apis/article'
+import { type Article } from '@/api/article'
 
 interface Category {
   label: string
