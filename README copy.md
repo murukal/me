@@ -1,2 +1,0 @@
-# dowthink
-do what think
