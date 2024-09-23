@@ -68,14 +68,14 @@ const Home = () => {
 
       {/* articles */}
       <div className='px-10'>
-        <section className='flex justify-between items-center'>
-          <h4 className='text-xl font-semibold'>Featured articles</h4>
-          <Button variant='text' suffix={<KeyboardArrowRight />} onClick={toCategories}>
-            <span className='text-sm font-semibold'>See All Articles</span>
-          </Button>
-        </section>
-
         <Box>
+          <section className='flex justify-between items-center'>
+            <h4 className='text-xl font-semibold'>Featured articles</h4>
+            <Button variant='text' suffix={<KeyboardArrowRight />} onClick={toCategories}>
+              <span className='text-sm font-semibold'>See All Articles</span>
+            </Button>
+          </section>
+
           <div className='grid grid-cols-5 gap-8 mt-12'>
             {articles.map((article) => {
               return (

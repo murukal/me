@@ -1,4 +1,5 @@
 'use client'
+
 import { Bench, ConfigProvider, ThemeProvider } from 'musae'
 import type { ReactNode } from 'react'
 import Lamp from '@/components/lamp'
