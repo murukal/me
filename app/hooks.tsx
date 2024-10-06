@@ -1,4 +1,4 @@
-import { MouseEventHandler, useEffect, useMemo, useState } from 'react'
+import { MouseEventHandler, useMemo } from 'react'
 import { useQuery } from '@apollo/client'
 import { CATEGORIES } from '@/api/category'
 

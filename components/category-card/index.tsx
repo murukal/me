@@ -1,4 +1,4 @@
-import { type ReactNode, type CSSProperties } from 'react'
+import { type CSSProperties } from 'react'
 import styles from './styles.module.css'
 import { clsx } from '@aiszlab/relax'
 import { useTheme } from 'musae'
