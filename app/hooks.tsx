@@ -1,51 +1,11 @@
-import { FC, MouseEventHandler, useEffect, useMemo, useState } from 'react'
-import { GraphQL, JavaScript, NodeJS, React, Typescript } from '@/components/stack-logos'
-import { type Article } from '@/api/article'
-
-interface Category {
-  label: string
-  logo: FC
-}
-
-/**
- * @description
- * categories
- */
-export const useCategories = () => {
-  const categories = useMemo<Category[]>(() => {
-    return [
-      {
-        label: 'GraphQL',
-        logo: GraphQL
-      },
-
-      {
-        label: 'JavaScript',
-        logo: JavaScript
-      },
-      {
-        label: 'NodeJS',
-        logo: NodeJS
-      },
-      {
-        label: 'React',
-        logo: React
-      },
-      {
-        label: 'Typescript',
-        logo: Typescript
-      }
-    ]
-  }, [])
-
-  return {
-    categories
-  }
-}
+import { MouseEventHandler, useEffect, useMemo, useState } from 'react'
+import { useQuery } from '@apollo/client'
+import { CATEGORIES } from '@/api/category'
 
 interface Link {
   label: string
-  onClick: MouseEventHandler
+  onClick?: MouseEventHandler
+  href?: string
 }
 
 interface LinkGroup {
@@ -57,17 +17,37 @@ interface LinkGroup {
  * @description
  * footer links
  */
-export const useFooterLinks = ({ categories }: { categories: Category[] }) => {
+export const useFooterLinks = () => {
+  const { data: { articleCategories: { items = [] } = {} } = {} } = useQuery(CATEGORIES, {
+    variables: {
+      paginateBy: { limit: 5, page: 1 }
+    },
+    fetchPolicy: 'cache-only'
+  })
+
   const categoryLinks = useMemo<Link[]>(() => {
-    return categories.map((item) => {
+    return items.map((item) => {
       return {
-        label: item.label,
+        label: item.name,
         onClick: (event) => {
           event.preventDefault()
         }
       }
     })
-  }, [categories])
+  }, [items])
+
+  const aboutMeLinks = useMemo<Link[]>(() => {
+    return [
+      {
+        label: 'Homepage',
+        href: 'https://dev.fantufantu.com/about-us'
+      },
+      {
+        label: 'Github',
+        href: 'https://github.com/murukal'
+      }
+    ]
+  }, [])
 
   return useMemo<LinkGroup[]>(() => {
     return [
@@ -77,7 +57,7 @@ export const useFooterLinks = ({ categories }: { categories: Category[] }) => {
       },
       {
         title: 'about me',
-        links: categoryLinks
+        links: aboutMeLinks
       },
       {
         title: 'get in touch',
@@ -89,30 +69,4 @@ export const useFooterLinks = ({ categories }: { categories: Category[] }) => {
       }
     ]
   }, [categoryLinks])
-}
-
-/**
- * @description
- * articles
- */
-export const useArticles = () => {
-  const [articles, setArticles] = useState<Article[]>([
-    {
-      id: 1,
-      title: '我写的第一篇文章',
-      content: '# 测试',
-      createdAt: 1321321321,
-      createdBy: {
-        avatar: '12321',
-        username: '12321'
-      }
-    }
-  ])
-
-  useEffect(() => {}, [])
-
-  return {
-    articles,
-    setArticles
-  }
 }

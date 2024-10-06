@@ -1,8 +1,24 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client'
+import { ApolloClient, from, HttpLink, InMemoryCache } from '@apollo/client'
+import { onError } from '@apollo/client/link/error'
+import { Notification } from 'musae'
 
 const client = new ApolloClient({
-  uri: 'https://flyby-router-demo.herokuapp.com/',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+
+  link: from([
+    onError(({ graphQLErrors, networkError }) => {
+      const errorMessage = graphQLErrors?.[0].message ?? networkError?.message
+      if (!errorMessage) return
+
+      Notification.error({
+        title: '接口调用异常！',
+        description: errorMessage
+      })
+    }),
+    new HttpLink({
+      uri: 'https://api.fantufantu.com'
+    })
+  ])
 })
 
 export { client }

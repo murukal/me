@@ -6,18 +6,19 @@ import { clsx } from '@aiszlab/relax'
 import { Quote, Button, useTheme, Divider } from 'musae'
 import Box from '@/components/box'
 import { KeyboardArrowRight, KeyboardArrowDown, Github } from 'musae/icons'
-import { useArticles, useCategories, useFooterLinks } from './hooks'
-import { createElement } from 'react'
+import { useFooterLinks } from './hooks'
 import { useRouter } from 'next/navigation'
-import CategoryCard from '@/components/category-card'
 import ArticleCard from '@/components/article-card'
+import CategoryCards from '../components/category-cards'
+import { useQuery } from '@apollo/client'
+import { ARTICLES } from '@/api/article'
 
 const Home = () => {
-  const { categories } = useCategories()
   const theme = useTheme()
-  const footerLinks = useFooterLinks({ categories })
+  const footerLinks = useFooterLinks()
   const router = useRouter()
-  const { articles } = useArticles()
+
+  const { data: { articles: { items: articles = [] } = {} } = {} } = useQuery(ARTICLES, {})
 
   const toCategories = () => {
     router.push('/categories')
@@ -54,20 +55,12 @@ const Home = () => {
             </Button>
           </section>
 
-          <div className='grid grid-cols-5 gap-8 mt-12'>
-            {categories.map((category) => {
-              return (
-                <CategoryCard key={category.label} label={category.label}>
-                  {createElement(category.logo)}
-                </CategoryCard>
-              )
-            })}
-          </div>
+          <CategoryCards limit={5} className='mt-12' />
         </Box>
       </div>
 
       {/* articles */}
-      <div className='px-10'>
+      <div className='px-10 mt-14'>
         <Box>
           <section className='flex justify-between items-center'>
             <h4 className='text-xl font-semibold'>Featured articles</h4>
@@ -122,11 +115,18 @@ const Home = () => {
                         <li key={link.label} className='cursor-pointer select-none' onClick={link.onClick}>
                           <a
                             className='text-lg'
-                            href='#'
+                            target='_blank'
+                            rel='noreferrer'
                             style={{
                               color: theme.colors.secondary
                             }}
-                            onClick={(e) => e.preventDefault()}
+                            {...(!!link.href && {
+                              href: link.href
+                            })}
+                            {...(!link.href && {
+                              href: '#',
+                              onClick: (e) => e.preventDefault()
+                            })}
                           >
                             {link.label}
                           </a>

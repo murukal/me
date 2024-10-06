@@ -6,11 +6,11 @@ import { useTheme } from 'musae'
 interface Props {
   className?: string
   style?: CSSProperties
-  children?: ReactNode
   label: string
+  src: string
 }
 
-const CategoryCard = ({ className, style, children, label }: Props) => {
+const CategoryCard = ({ className, style, label, src }: Props) => {
   const theme = useTheme()
 
   return (
@@ -30,7 +30,15 @@ const CategoryCard = ({ className, style, children, label }: Props) => {
         } as CSSProperties
       }
     >
-      <div className={clsx('p-3 transition-colors rounded-md w-fit', styles['tech-logo'])}>{children}</div>
+      <div
+        className={clsx(
+          'w-14 h-14 transition-colors rounded-md',
+          'flex justify-center items-center',
+          styles['tech-logo']
+        )}
+      >
+        <img src={`https://${src}`} alt={label} width={32} height={32} />
+      </div>
       <span className='text-2xl font-bold'>{label}</span>
     </div>
   )

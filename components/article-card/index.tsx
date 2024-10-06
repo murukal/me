@@ -1,26 +1,50 @@
 import { Avatar, Image } from 'musae'
 import dayjs from 'dayjs'
+import { useState } from 'react'
+import { random } from '@aiszlab/fuzzy/avatar'
+import { useMounted } from '@aiszlab/relax'
 
 interface Props {
   title: string
-  avatar: string
+  avatar?: string | null
   username: string
-  createdAt: number
+  createdAt: string
 }
 
-const ArticleCard = ({ avatar, title, username, createdAt }: Props) => {
-  return (
-    <div className='rounded-lg flex flex-col hover:shadow-lg cursor-pointer p-4'>
-      <Image src='https://picsum.photos/200/300' className='rounded-t-md' alt='example' height={60} width='100%' />
+const ArticleCard = ({ avatar: _avatar, title, username, createdAt }: Props) => {
+  const [avatar, setAvatar] = useState(_avatar ?? '')
 
-      <h5 className='font-bold mt-4'>{title}</h5>
+  useMounted(async () => {
+    if (avatar) return
+    setAvatar(await random())
+  })
+
+  return (
+    <div className='rounded-lg flex flex-col hover:shadow-lg cursor-pointer transition-all overflow-hidden'>
+      <Image
+        src='https://picsum.photos/200/300'
+        className='rounded-t-md'
+        alt={title}
+        height={200}
+        width='300'
+        previewable={false}
+      />
 
       <section
-        className='grid items-center'
+        className='grid items-center p-4'
         style={{
-          gridTemplateAreas: '"avatar author" "avatar supporting"'
+          gridTemplateAreas: '"title title" "avatar author" "avatar supporting"'
         }}
       >
+        <h5
+          className='font-bold mb-4'
+          style={{
+            gridArea: 'title'
+          }}
+        >
+          {title}
+        </h5>
+
         <Avatar
           alt='JACK'
           size='large'
@@ -33,6 +57,7 @@ const ArticleCard = ({ avatar, title, username, createdAt }: Props) => {
         <h6 className='text-xs font-semibold' style={{ gridArea: 'author' }}>
           {username}
         </h6>
+
         <span className='text-xs' style={{ gridArea: 'supporting' }}>
           {dayjs(createdAt).format('YYYY-MM-DD')}
         </span>
