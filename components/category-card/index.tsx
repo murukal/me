@@ -1,3 +1,5 @@
+'use client'
+
 import { type CSSProperties } from 'react'
 import styles from './styles.module.css'
 import { clsx } from '@aiszlab/relax'
@@ -37,6 +39,7 @@ const CategoryCard = ({ className, style, label, src }: Props) => {
           styles['tech-logo']
         )}
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={`https://${src}`} alt={label} width={32} height={32} />
       </div>
       <span className='text-2xl font-bold'>{label}</span>

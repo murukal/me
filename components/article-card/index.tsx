@@ -1,3 +1,5 @@
+'use client'
+
 import { Avatar, Image } from 'musae'
 import dayjs from 'dayjs'
 import { useState } from 'react'

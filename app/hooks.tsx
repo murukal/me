@@ -68,5 +68,5 @@ export const useFooterLinks = () => {
         links: categoryLinks
       }
     ]
-  }, [categoryLinks])
+  }, [aboutMeLinks, categoryLinks])
 }
