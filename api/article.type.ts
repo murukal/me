@@ -9,3 +9,7 @@ export interface Article {
   createdBy: Who
   categories: Category[]
 }
+
+export interface FilterArticlesBy {
+  categoryCodes?: string[]
+}
