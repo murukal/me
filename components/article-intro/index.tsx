@@ -1,3 +1,5 @@
+'use client'
+
 import type { Who } from '@/api/authentication.type'
 import type { Category } from '@/api/category.type'
 import { useRandomAvatar } from '@/hooks/use-random-avatar'

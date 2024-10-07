@@ -30,7 +30,7 @@ const CategoryCards = ({ limit, className }: Props) => {
 
       {!loading &&
         articleCategories?.items.map((category) => {
-          return <CategoryCard key={category.code} label={category.name} src={category.image} />
+          return <CategoryCard key={category.code} code={category.code} label={category.name} src={category.image} />
         })}
     </div>
   )

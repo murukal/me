@@ -4,16 +4,26 @@ import { type CSSProperties } from 'react'
 import styles from './styles.module.css'
 import { clsx } from '@aiszlab/relax'
 import { useTheme } from 'musae'
+import { useRouter } from 'next/navigation'
 
 interface Props {
   className?: string
   style?: CSSProperties
   label: string
   src: string
+  code: string
 }
 
-const CategoryCard = ({ className, style, label, src }: Props) => {
+const CategoryCard = ({ className, style, label, src, code }: Props) => {
   const theme = useTheme()
+  const router = useRouter()
+
+  const toArticles = () => {
+    const query = new URLSearchParams({
+      category: code
+    })
+    router.push(`/articles?${query.toString()}`)
+  }
 
   return (
     <div
@@ -31,6 +41,7 @@ const CategoryCard = ({ className, style, label, src }: Props) => {
           ...style
         } as CSSProperties
       }
+      onClick={toArticles}
     >
       <div
         className={clsx(

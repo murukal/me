@@ -1,3 +1,5 @@
+'use client'
+
 import { WHO_AM_I } from '@/api/authentication'
 import { useRandomAvatar } from '@/hooks/use-random-avatar'
 import { useQuery } from '@apollo/client'
@@ -15,7 +17,7 @@ const Account = () => {
 
   if (!whoAmI) {
     return (
-      <Link href="https://admin.fantufantu.com/sign-up">
+      <Link href='https://admin.fantufantu.com/sign-up'>
         <Button shape='circular' variant='text'>
           <AccountCircle size={16} />
         </Button>
