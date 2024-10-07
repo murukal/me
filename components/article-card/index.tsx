@@ -18,7 +18,7 @@ const ArticleCard = ({ avatar: _avatar, title, username, createdAt, id }: Props)
   const avatar = useRandomAvatar(_avatar)
 
   const toArticle = () => {
-    router.push(`/article/${id}`)
+    router.push(`/articles/${id}`)
   }
 
   return (
