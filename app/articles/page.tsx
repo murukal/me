@@ -1,7 +1,6 @@
 import { ARTICLES } from '@/api/article'
 import { client } from '@/api'
 import Articles from '@/components/articles'
-import { type ReadonlyURLSearchParams } from 'next/navigation'
 
 interface Props {
   searchParams?: {
