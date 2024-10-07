@@ -20,6 +20,34 @@ export const ARTICLES: TypedDocumentNode<
           username
           avatar
         }
+        categories {
+          code
+          name
+        }
+      }
+    }
+  }
+`
+
+/**
+ * @description
+ * 根据id查询文章
+ */
+export const ARTICLE: TypedDocumentNode<
+  {
+    article: Article
+  },
+  {
+    id: number
+  }
+> = gql`
+  query Article($id: Int!) {
+    article(id: $id) {
+      title
+      content
+      categories {
+        code
+        name
       }
     }
   }

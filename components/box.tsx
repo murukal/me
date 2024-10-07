@@ -11,7 +11,7 @@ interface Props {
 
 const Box = ({ children, className, style }: Props) => {
   return (
-    <div className={clsx('max-w-screen-2xl mx-auto', className)} style={style}>
+    <div className={clsx('max-w-[120ch] mx-auto', className)} style={style}>
       {children}
     </div>
   )

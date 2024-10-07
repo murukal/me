@@ -2,27 +2,30 @@
 
 import { Avatar, Image } from 'musae'
 import dayjs from 'dayjs'
-import { useState } from 'react'
-import { random } from '@aiszlab/fuzzy/avatar'
-import { useMounted } from '@aiszlab/relax'
+import { useRouter } from 'next/navigation'
+import { useRandomAvatar } from '@/hooks/use-random-avatar'
 
 interface Props {
   title: string
   avatar?: string | null
   username: string
   createdAt: string
+  id: number
 }
 
-const ArticleCard = ({ avatar: _avatar, title, username, createdAt }: Props) => {
-  const [avatar, setAvatar] = useState(_avatar ?? '')
+const ArticleCard = ({ avatar: _avatar, title, username, createdAt, id }: Props) => {
+  const router = useRouter()
+  const avatar = useRandomAvatar(_avatar)
 
-  useMounted(async () => {
-    if (avatar) return
-    setAvatar(await random())
-  })
+  const toArticle = () => {
+    router.push(`/article/${id}`)
+  }
 
   return (
-    <div className='rounded-lg flex flex-col hover:shadow-lg cursor-pointer transition-all overflow-hidden'>
+    <div
+      className='rounded-lg flex flex-col hover:shadow-lg cursor-pointer transition-all overflow-hidden'
+      onClick={toArticle}
+    >
       <Image
         src='https://picsum.photos/200/300'
         className='rounded-t-md'

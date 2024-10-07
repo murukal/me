@@ -5,6 +5,8 @@ import type { ReactNode } from 'react'
 import Lamp from '@/components/lamp'
 import { client } from '@/api'
 import { ApolloProvider } from '@apollo/client'
+import Account from './account'
+import Logo from './logo'
 
 interface Props {
   children: ReactNode
@@ -15,7 +17,17 @@ const Provided = ({ children }: Props) => {
     <ApolloProvider client={client}>
       <ConfigProvider>
         <ThemeProvider>
-          <Bench trailing={<Lamp />}>{children}</Bench>
+          <Bench
+            title={<Logo />}
+            trailing={
+              <>
+                <Lamp />
+                <Account />
+              </>
+            }
+          >
+            {children}
+          </Bench>
         </ThemeProvider>
       </ConfigProvider>
     </ApolloProvider>

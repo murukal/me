@@ -1,10 +1,11 @@
+import type { Who } from './authentication.type'
+import type { Category } from './category.type'
+
 export interface Article {
   id: number
   title: string
   content: string
   createdAt: string
-  createdBy: {
-    username: string
-    avatar?: string | null
-  }
+  createdBy: Who
+  categories: Category[]
 }

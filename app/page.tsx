@@ -24,6 +24,10 @@ const Home = () => {
     router.push('/categories')
   }
 
+  const toArticles = () => {
+    router.push('/articles')
+  }
+
   return (
     <div className='pb-10'>
       <div className='px-10'>
@@ -64,7 +68,7 @@ const Home = () => {
         <Box>
           <section className='flex justify-between items-center'>
             <h4 className='text-xl font-semibold'>Featured articles</h4>
-            <Button variant='text' suffix={<KeyboardArrowRight />} onClick={toCategories}>
+            <Button variant='text' suffix={<KeyboardArrowRight />} onClick={toArticles}>
               <span className='text-sm font-semibold'>See All Articles</span>
             </Button>
           </section>
@@ -73,6 +77,7 @@ const Home = () => {
             {articles.map((article) => {
               return (
                 <ArticleCard
+                  id={article.id}
                   key={article.id}
                   title={article.title}
                   avatar={article.createdBy.avatar}
@@ -87,7 +92,7 @@ const Home = () => {
 
       {/* footer */}
       <div className='px-10 pb-6 pt-14'>
-        <Box className='flex justify-between'>
+        <Box className='flex justify-between gap-20'>
           <section className='flex flex-col gap-5'>
             <h4 className='text-3xl font-semibold'>
               tutu
@@ -104,7 +109,7 @@ const Home = () => {
           </section>
 
           {/* links */}
-          <div className={clsx('flex gap-24', styles['links'])}>
+          <div className={clsx('flex gap-20', styles['links'])}>
             {footerLinks.map(({ links, title }) => {
               return (
                 <section key={title}>
