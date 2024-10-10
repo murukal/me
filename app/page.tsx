@@ -80,9 +80,8 @@ const Home = () => {
                   id={article.id}
                   key={article.id}
                   title={article.title}
-                  avatar={article.createdBy.avatar}
                   createdAt={article.createdAt}
-                  username={article.createdBy.username}
+                  createdBy={article.createdBy}
                 />
               )
             })}

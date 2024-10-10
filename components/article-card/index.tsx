@@ -4,18 +4,18 @@ import { Avatar, Image } from 'musae'
 import dayjs from 'dayjs'
 import { useRouter } from 'next/navigation'
 import { useRandomAvatar } from '@/hooks/use-random-avatar'
+import type { Who } from '@/api/authentication.type'
 
 interface Props {
   title: string
-  avatar?: string | null
-  username: string
   createdAt: string
   id: number
+  createdBy: Who
 }
 
-const ArticleCard = ({ avatar: _avatar, title, username, createdAt, id }: Props) => {
+const ArticleCard = ({ title, createdAt, id, createdBy }: Props) => {
   const router = useRouter()
-  const avatar = useRandomAvatar(_avatar)
+  const avatar = useRandomAvatar(createdBy.avatar)
 
   const toArticle = () => {
     router.push(`/articles/${id}`)
@@ -51,7 +51,7 @@ const ArticleCard = ({ avatar: _avatar, title, username, createdAt, id }: Props)
         </h5>
 
         <Avatar
-          alt='JACK'
+          alt={createdBy.nickname}
           size='large'
           src={avatar}
           style={{
@@ -60,7 +60,7 @@ const ArticleCard = ({ avatar: _avatar, title, username, createdAt, id }: Props)
         />
 
         <h6 className='text-xs font-semibold' style={{ gridArea: 'author' }}>
-          {username}
+          {createdBy.nickname}
         </h6>
 
         <span className='text-xs' style={{ gridArea: 'supporting' }}>

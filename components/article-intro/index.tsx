@@ -14,7 +14,7 @@ interface Props {
   categories: Category[]
 }
 
-const ArticleIntro = ({ content, title, createdBy: { avatar, username }, createdAt, categories }: Props) => {
+const ArticleIntro = ({ content, title, createdBy: { avatar, nickname }, createdAt, categories }: Props) => {
   const _avatar = useRandomAvatar(avatar)
 
   return (
@@ -26,7 +26,7 @@ const ArticleIntro = ({ content, title, createdBy: { avatar, username }, created
     >
       <div className='flex items-center gap-1' style={{ gridArea: 'created' }}>
         <Avatar src={_avatar} />
-        <span className='ml-1'>{username}</span>
+        <span className='ml-1'>{nickname}</span>
         <span>·</span>
         <span>{dayjs(createdAt).format('YYYY-MM-DD')}</span>
       </div>

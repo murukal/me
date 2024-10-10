@@ -18,7 +18,7 @@ export const ARTICLES: TypedDocumentNode<
         createdAt
         createdBy {
           id
-          username
+          nickname
           avatar
         }
         categories {

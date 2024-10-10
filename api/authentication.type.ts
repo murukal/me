@@ -1,4 +1,4 @@
 export interface Who {
-  username: string
+  nickname: string
   avatar?: string | null
 }
