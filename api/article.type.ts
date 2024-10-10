@@ -1,5 +1,6 @@
 import type { Who } from './authentication.type'
 import type { Category } from './category.type'
+import type { PaginateBy } from './pagination.type'
 
 export interface Article {
   id: number
@@ -12,4 +13,9 @@ export interface Article {
 
 export interface FilterArticlesBy {
   categoryCodes?: string[]
+}
+
+export interface QueryArticlesBy {
+  paginateBy?: PaginateBy
+  filterBy?: FilterArticlesBy
 }

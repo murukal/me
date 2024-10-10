@@ -2,18 +2,45 @@
 
 import type { Article } from '@/api/article.type'
 import Box from '../box'
-import { clsx } from '@aiszlab/relax'
-import styles from './styles.module.css'
+import { useInfiniteScroll } from '@aiszlab/relax'
 import ArticleIntro from '../article-intro'
 import { Divider } from 'musae'
+import { useLazyQuery } from '@apollo/client'
+import { ARTICLES } from '@/api/article'
+import { useEffect } from 'react'
 
 interface Props {
   defaultValue: Article[]
 }
 
 const Articles = ({ defaultValue }: Props) => {
+  // const [page, setPage] = useState(1)
+  const [, { data: { articles: { items } = { items: [] } } = {}, fetchMore }] = useLazyQuery(ARTICLES, {
+    ssr: false
+  })
+
+  const [sentinelRef] = useInfiniteScroll<HTMLDivElement>({
+    hasMore: true,
+    onLoadMore: () => {
+      console.log('11111')
+    }
+  })
+
+  useEffect(() => {
+    fetchMore({
+      variables: {
+        paginateBy: {
+          page: 2,
+          limit: 10
+        }
+      }
+    }).then(() => {
+      console.log('11111')
+    })
+  }, [])
+
   return (
-    <Box className={clsx('p-5', styles.articles)}>
+    <Box className='p-5'>
       {defaultValue.map((_article) => {
         return [
           <ArticleIntro
@@ -25,9 +52,15 @@ const Articles = ({ defaultValue }: Props) => {
             createdAt={_article.createdAt}
             categories={_article.categories}
           />,
-          <Divider key={`${_article.id}-separator`} className={styles.separator} margin={[40, 24]} />
+          <Divider key={`${_article.id}-separator`} margin={[40, 24]} />
         ]
       })}
+
+      {items.map((_item) => {
+        return <span key={_item.id}>1</span>
+      })}
+
+      <div ref={sentinelRef}>12321321</div>
     </Box>
   )
 }

@@ -1,8 +1,32 @@
-import { ApolloClient, from, HttpLink, InMemoryCache } from '@apollo/client'
+import { ApolloClient, type FieldFunctionOptions, from, HttpLink, InMemoryCache } from '@apollo/client'
 import { onError } from '@apollo/client/link/error'
+import type { Article, QueryArticlesBy } from './article.type'
+import type { Paginated } from './pagination.type'
 
 const client = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          articles: {
+            keyArgs: ['paginateBy', 'filterBy'],
+
+            merge: (
+              existing: Paginated<Article>,
+              incoming: Paginated<Article>,
+              { args }: FieldFunctionOptions<QueryArticlesBy>
+            ) => {
+              console.log(args)
+              return {
+                items: [],
+                total: 0
+              }
+            }
+          }
+        }
+      }
+    }
+  }),
 
   link: from([
     onError(({ graphQLErrors, networkError }) => {
