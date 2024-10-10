@@ -35,37 +35,32 @@ const ArticleCard = ({ title, createdAt, id, createdBy }: Props) => {
         previewable={false}
       />
 
-      <section
-        className='grid items-center p-4'
-        style={{
-          gridTemplateAreas: '"title title" "avatar author" "avatar supporting"'
-        }}
-      >
-        <h5
-          className='font-bold mb-4'
+      <section className='p-4 flex-1 flex flex-col gap-4'>
+        <h5 className='font-bold mb-auto'>{title}</h5>
+
+        <div
+          className='grid items-center gap-x-4'
           style={{
-            gridArea: 'title'
+            gridTemplateAreas: '"avatar author" "avatar supporting"'
           }}
         >
-          {title}
-        </h5>
+          <Avatar
+            alt={createdBy.nickname}
+            size='large'
+            src={avatar}
+            style={{
+              gridArea: 'avatar'
+            }}
+          />
 
-        <Avatar
-          alt={createdBy.nickname}
-          size='large'
-          src={avatar}
-          style={{
-            gridArea: 'avatar'
-          }}
-        />
+          <h6 className='text-xs font-semibold' style={{ gridArea: 'author' }}>
+            {createdBy.nickname}
+          </h6>
 
-        <h6 className='text-xs font-semibold' style={{ gridArea: 'author' }}>
-          {createdBy.nickname}
-        </h6>
-
-        <span className='text-xs' style={{ gridArea: 'supporting' }}>
-          {dayjs(createdAt).format('YYYY-MM-DD')}
-        </span>
+          <span className='text-xs' style={{ gridArea: 'supporting' }}>
+            {dayjs(createdAt).format('YYYY-MM-DD')}
+          </span>
+        </div>
       </section>
     </div>
   )
