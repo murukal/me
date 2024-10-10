@@ -1,13 +1,25 @@
 import { NextResponse, type NextRequest } from 'next/server'
 
-const middleware = (request: NextRequest) => {
-  const _authenticated = request.nextUrl.searchParams.get('authenticated')
-  if (_authenticated) {
-    const response = NextResponse.next()
+const AUTHENTICATED = 'authenticated'
 
+const middleware = (request: NextRequest) => {
+  const hasAuthenticated = request.nextUrl.searchParams.has(AUTHENTICATED)
+
+  if (hasAuthenticated) {
+    const _authenticated = request.nextUrl.searchParams.get(AUTHENTICATED)
     const url = new URL(request.url)
-    url.searchParams.delete('authenticated')
-    return Response.redirect(url)
+    url.searchParams.delete(AUTHENTICATED)
+    const response = NextResponse.redirect(url)
+
+    if (_authenticated) {
+      response.cookies.set({
+        httpOnly: true,
+        name: AUTHENTICATED,
+        value: _authenticated
+      })
+    }
+
+    return response
   }
 }
 
