@@ -22,7 +22,13 @@ const CategoryCards = ({ limit, className }: Props) => {
   })
 
   return (
-    <div className={clsx('grid grid-cols-5 gap-8', className)}>
+    <div
+      className={clsx(
+        'grid gap-8',
+        'xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1',
+        className
+      )}
+    >
       {loading &&
         Array.from({ length: limit }).map((_, key) => {
           return <Skeleton className='h-52' key={key} />
