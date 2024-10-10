@@ -16,10 +16,9 @@ const Account = () => {
   const href = useMemo(() => {
     if (!isDomUsable()) return ''
 
-    const searchParams = new URLSearchParams({
-      redirect: window.location?.href
-    })
-    return `https://admin.fantufantu.com/sign-up?${searchParams.toString()}`
+    const url = new URL('/sign-up', 'https://admin.fantufantu.com')
+    url.searchParams.append('redirect', window.location.href)
+    return url.toString()
   }, [])
 
   if (loading) {
