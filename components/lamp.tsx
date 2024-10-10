@@ -1,16 +1,18 @@
-import { useTheme } from 'musae'
+import { Button, useTheme } from 'musae'
 import { Bedtime, WbSunny } from 'musae/icons'
 import { createElement } from 'react'
 
 const Lamp = () => {
-  const { mode, toggle, colors } = useTheme()
+  const { mode, toggle } = useTheme()
   const isDark = mode === 'dark'
 
-  return createElement(isDark ? WbSunny : Bedtime, {
-    size: 24,
-    onClick: toggle,
-    color: colors.primary
-  })
+  return (
+    <Button onClick={toggle} variant='text' shape='circular'>
+      {createElement(isDark ? WbSunny : Bedtime, {
+        size: 16
+      })}
+    </Button>
+  )
 }
 
 export default Lamp

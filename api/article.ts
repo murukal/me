@@ -26,6 +26,7 @@ export const ARTICLES: TypedDocumentNode<
           name
         }
       }
+      total
     }
   }
 `

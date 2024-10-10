@@ -2,6 +2,7 @@ import { ApolloClient, type FieldFunctionOptions, from, HttpLink, InMemoryCache 
 import { onError } from '@apollo/client/link/error'
 import type { Article, QueryArticlesBy } from './article.type'
 import type { Paginated } from './pagination.type'
+import type { Partialable } from '@aiszlab/relax/types'
 
 const client = new ApolloClient({
   cache: new InMemoryCache({
@@ -9,17 +10,24 @@ const client = new ApolloClient({
       Query: {
         fields: {
           articles: {
-            keyArgs: ['paginateBy', 'filterBy'],
+            keyArgs: false,
 
             merge: (
-              existing: Paginated<Article>,
+              existing: Partialable<Paginated<Article>>,
               incoming: Paginated<Article>,
               { args }: FieldFunctionOptions<QueryArticlesBy>
             ) => {
-              console.log(args)
+              const { limit = 0, page = 1 } = args?.paginateBy ?? {}
+              const offset = (page - 1) * limit
+              const merged = existing?.items.slice(0) ?? []
+
+              incoming.items.forEach((item, index) => {
+                merged[offset + index] = item
+              })
+
               return {
-                items: [],
-                total: 0
+                items: merged,
+                total: incoming.total
               }
             }
           }
