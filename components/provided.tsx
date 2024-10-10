@@ -20,7 +20,7 @@ const Provided = ({ children }: Props) => {
           <Bench
             title={<Logo />}
             trailing={
-              <div className='flex gap-4'>
+              <div className='flex gap-4 items-center'>
                 <Lamp />
                 <Account />
               </div>
