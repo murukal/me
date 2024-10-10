@@ -19,6 +19,7 @@ const Articles = ({ defaultValue }: Props) => {
           <ArticleIntro
             content={_article.content}
             title={_article.title}
+            id={_article.id}
             key={_article.id}
             createdBy={_article.createdBy}
             createdAt={_article.createdAt}

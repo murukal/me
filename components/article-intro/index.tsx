@@ -4,9 +4,12 @@ import type { Who } from '@/api/authentication.type'
 import type { Category } from '@/api/category.type'
 import { useRandomAvatar } from '@/hooks/use-random-avatar'
 import dayjs from 'dayjs'
-import { Avatar, Tag } from 'musae'
+import { Avatar, Button, Tag } from 'musae'
+import { useRouter } from 'next/navigation'
+import { Visibility } from 'musae/icons'
 
 interface Props {
+  id: number
   title: string
   content: string
   createdBy: Who
@@ -14,14 +17,19 @@ interface Props {
   categories: Category[]
 }
 
-const ArticleIntro = ({ content, title, createdBy: { avatar, nickname }, createdAt, categories }: Props) => {
+const ArticleIntro = ({ content, title, createdBy: { avatar, nickname }, createdAt, categories, id }: Props) => {
   const _avatar = useRandomAvatar(avatar)
+  const router = useRouter()
+
+  const toArticle = () => {
+    router.push(`/articles/${id}`)
+  }
 
   return (
     <section
       style={{
         display: 'grid',
-        gridTemplateAreas: '"created cover" "title cover" "content cover" "supporting ."'
+        gridTemplateAreas: '"created cover" "title cover" "content cover" "supporting supporting"'
       }}
     >
       <div className='flex items-center gap-1' style={{ gridArea: 'created' }}>
@@ -47,6 +55,12 @@ const ArticleIntro = ({ content, title, createdBy: { avatar, nickname }, created
         {categories.map((_category) => {
           return <Tag key={_category.code}>{_category.name}</Tag>
         })}
+
+        <div className='ml-auto'>
+          <Button variant='text' shape='circular' onClick={toArticle}>
+            <Visibility size={20} />
+          </Button>
+        </div>
       </div>
     </section>
   )
