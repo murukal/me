@@ -1,52 +1,33 @@
-'use client'
-
 import { ARTICLE } from '@/api/article'
-import Box from '@/components/box'
-import { useQuery } from '@apollo/client'
-import dayjs from 'dayjs'
-import { Skeleton, RichTextEditor, useTheme } from 'musae'
-import { useParams } from 'next/navigation'
-import ArticleFooter from '@/components/article-footer'
+import Article from '@/components/article'
+import { client } from '@/api'
+import { unified } from 'unified'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
+import rehypeSanitize from 'rehype-sanitize'
+import rehypeStringify from 'rehype-stringify'
 
 type Params = {
   id: string
 }
 
-const Article = () => {
-  const { id } = useParams<Params>()
-  const { loading, data: { article } = {} } = useQuery(ARTICLE, { variables: { id: +id } })
-  const theme = useTheme()
+const Page = async ({ params }: { params: Params }) => {
+  const { data: { article } = {} } = await client.query({
+    query: ARTICLE,
+    variables: {
+      id: +params.id
+    }
+  })
 
-  if (loading) {
-    return (
-      <Box>
-        <Skeleton></Skeleton>
-      </Box>
-    )
-  }
+  const html = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeSanitize)
+    .use(rehypeStringify)
+    .process(article?.content)
+    .then((markdown) => String(markdown ?? ''))
 
-  if (!article) {
-    return <Box>Article not found</Box>
-  }
-
-  return (
-    <Box className='text-base p-5'>
-      <h2 className='text-4xl font-bold'>{article.title}</h2>
-
-      <p
-        className='mt-5'
-        style={{
-          color: theme.colors.secondary
-        }}
-      >
-        {dayjs(article.createdAt).format('MMM DD')}
-      </p>
-
-      <RichTextEditor className='mt-8' defaultValue={article.content} use='markdown' disabled />
-
-      <ArticleFooter />
-    </Box>
-  )
+  return <Article article={article!} html={html} />
 }
 
-export default Article
+export default Page

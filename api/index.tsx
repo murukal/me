@@ -9,12 +9,16 @@ const client = new ApolloClient({
       const errorMessage = graphQLErrors?.[0].message ?? networkError?.message
       if (!errorMessage) return
 
-      import('musae').then((_) => {
-        _.Notification.error({
-          title: '接口调用异常！',
-          description: errorMessage
+      import('musae')
+        .then((_) => {
+          _.Notification.error({
+            title: '接口调用异常！',
+            description: errorMessage
+          })
         })
-      })
+        .catch(() => {
+          console.error(errorMessage)
+        })
     }),
     new HttpLink({
       uri: 'https://api.fantufantu.com'
