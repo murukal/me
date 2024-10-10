@@ -31,18 +31,17 @@ const ArticleIntro = ({ content, title, createdBy: { avatar, nickname }, created
         <span>{dayjs(createdAt).format('YYYY-MM-DD')}</span>
       </div>
 
-      <h3 className='text-2xl mt-2.5' style={{ gridArea: 'title' }}>
+      <h3 className='text-2xl mt-2.5 font-medium' style={{ gridArea: 'title' }}>
         {title}
       </h3>
 
-      <p
-        className='text-base mt-2'
+      <div
+        dangerouslySetInnerHTML={{ __html: content }}
+        className='text-base mt-2 line-clamp-3'
         style={{
           gridArea: 'content'
         }}
-      >
-        {content}
-      </p>
+      />
 
       <div className='mt-8 flex items-center gap-2' style={{ gridArea: 'supporting' }}>
         {categories.map((_category) => {

@@ -1,11 +1,7 @@
 import { ARTICLE } from '@/api/article'
 import Article from '@/components/article'
 import { client } from '@/api'
-import { unified } from 'unified'
-import remarkParse from 'remark-parse'
-import remarkRehype from 'remark-rehype'
-import rehypeSanitize from 'rehype-sanitize'
-import rehypeStringify from 'rehype-stringify'
+import { markdownToHtml } from '@/utils/markdown'
 
 type Params = {
   id: string
@@ -19,13 +15,7 @@ const Page = async ({ params }: { params: Params }) => {
     }
   })
 
-  const html = await unified()
-    .use(remarkParse)
-    .use(remarkRehype)
-    .use(rehypeSanitize)
-    .use(rehypeStringify)
-    .process(article?.content)
-    .then((markdown) => String(markdown ?? ''))
+  const html = await markdownToHtml(article?.content)
 
   return <Article article={article!} html={html} />
 }

@@ -1,6 +1,7 @@
 import { ARTICLES } from '@/api/article'
 import { client } from '@/api'
 import Articles from '@/components/articles'
+import { markdownToHtml } from '@/utils/markdown'
 
 interface Props {
   searchParams?: {
@@ -24,7 +25,14 @@ const Page = async ({ searchParams: { category } = {} }: Props) => {
     }
   })
 
-  return <Articles defaultValue={data.articles.items ?? []}></Articles>
+  const _articles = await Promise.all(
+    data.articles.items.map(async (_article) => ({
+      ..._article,
+      content: await markdownToHtml(_article.content)
+    }))
+  )
+
+  return <Articles defaultValue={_articles} />
 }
 
 export default Page
