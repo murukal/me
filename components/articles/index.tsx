@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 'use client'
 
 import type { Article } from '@/api/article.type'
@@ -58,7 +57,6 @@ const Articles = ({ defaultValue }: Props) => {
         ]
       })}
 
-      {/* @ts-expect-error */}
       <div ref={sentinelRef} />
     </Box>
   )
