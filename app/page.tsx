@@ -59,7 +59,7 @@ const Home = () => {
             </Button>
           </section>
 
-          <CategoryCards limit={5} className='mt-12' />
+          <CategoryCards limit={5} className='mt-12' refetch />
         </Box>
       </div>
 

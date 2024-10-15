@@ -1,24 +1,49 @@
 'use client'
 
 import { CATEGORIES } from '@/api/category'
-import { useQuery } from '@apollo/client'
-import { Skeleton } from 'musae'
+import { useLazyQuery } from '@apollo/client'
 import CategoryCard from '../category-card'
-import { clsx } from '@aiszlab/relax'
+import { clsx, useMounted } from '@aiszlab/relax'
+import type { Category } from '@/api/category.type'
+import { Skeleton } from 'musae'
 
 interface Props {
+  defaultValue?: Category[]
+  defaultTotal?: number
+  defaultPage?: number
   limit: number
   className?: string
+  refetch?: boolean
 }
 
-const CategoryCards = ({ limit, className }: Props) => {
-  const { data: { articleCategories } = {}, loading } = useQuery(CATEGORIES, {
-    variables: {
-      paginateBy: {
-        page: 1,
-        limit
+const CategoryCards = ({
+  defaultValue = [],
+  limit,
+  defaultPage = 1,
+  defaultTotal = 0,
+  className,
+  refetch: _refetch
+}: Props) => {
+  const [refetch, { data: { articleCategories: { items = defaultValue, total = defaultTotal } = {} } = {}, loading }] =
+    useLazyQuery(CATEGORIES)
+
+  console.log('total====', total)
+  console.log(limit)
+  console.log(defaultPage)
+
+  console.log('loading====', loading)
+
+  useMounted(() => {
+    if (!_refetch) return
+
+    refetch({
+      variables: {
+        paginateBy: {
+          page: defaultPage,
+          limit
+        }
       }
-    }
+    })
   })
 
   return (
@@ -29,14 +54,13 @@ const CategoryCards = ({ limit, className }: Props) => {
         className
       )}
     >
+      {items.map((category) => {
+        return <CategoryCard key={category.code} code={category.code} label={category.name} src={category.image} />
+      })}
+
       {loading &&
         Array.from({ length: limit }).map((_, key) => {
           return <Skeleton className='h-52' key={key} />
-        })}
-
-      {!loading &&
-        articleCategories?.items.map((category) => {
-          return <CategoryCard key={category.code} code={category.code} label={category.name} src={category.image} />
         })}
     </div>
   )
