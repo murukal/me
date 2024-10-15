@@ -4,31 +4,32 @@ import { ARTICLES } from '@/api/article'
 import { useQuery } from '@apollo/client'
 import ArticleCard from '../card'
 import { Skeleton } from 'musae'
+import { clsx } from '@aiszlab/relax'
 
-const ArticleCards = () => {
-  const {
-    data: { articles: { items: articles = [] } = {} } = {},
-    loading,
-    called
-  } = useQuery(ARTICLES, {
+interface Props {
+  className?: string
+}
+
+const LIMIT = 4
+
+const ArticleCards = ({ className }: Props) => {
+  const { data: { articles: { items: articles = [] } = {} } = {}, loading } = useQuery(ARTICLES, {
     variables: {
       paginateBy: {
         page: 1,
-        limit: 5
+        limit: LIMIT
       }
     }
   })
 
-  const isLoading = !called || loading
-
   return (
-    <div className='grid grid-cols-5 gap-8 mt-12'>
-      {isLoading &&
-        Array.from({ length: 5 }).map((_, index) => {
-          return <Skeleton className='h-96' key={index} />
+    <div className={clsx('grid gap-8 mt-12', 'lg:grid-cols-4 sm:grid-cols-2 grid-cols-1', className)}>
+      {loading &&
+        Array.from({ length: LIMIT }).map((_, index) => {
+          return <Skeleton className='h-80' key={index} />
         })}
 
-      {!isLoading &&
+      {!loading &&
         articles.map((article) => {
           return (
             <ArticleCard

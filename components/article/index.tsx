@@ -4,7 +4,7 @@ import type { Article as ArticleType } from '@/api/article.type'
 import Box from '../box'
 import { useTheme } from 'musae'
 import dayjs from 'dayjs'
-import ArticleFooter from '../article-footer'
+import ArticleFooter from './footer'
 import { lazy, Suspense } from 'react'
 
 interface Props {
