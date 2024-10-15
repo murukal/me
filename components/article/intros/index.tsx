@@ -1,9 +1,9 @@
 'use client'
 
-import type { Article } from '@/api/article.type'
-import Box from '../box'
+import type { Article, FilterArticlesBy } from '@/api/article.type'
+import Box from '../../box'
 import { useInfiniteScroll, useMounted } from '@aiszlab/relax'
-import ArticleIntro from '../article-intro'
+import ArticleIntro from '../intro'
 import { Divider } from 'musae'
 import { useLazyQuery } from '@apollo/client'
 import { ARTICLES } from '@/api/article'
@@ -14,12 +14,15 @@ interface Props {
   defaultTotal: number
   defaultPage?: number
   defaultLimit?: number
+  filterBy?: FilterArticlesBy
 }
 
-const Articles = ({ defaultValue, defaultTotal, defaultPage = 1, defaultLimit = 10 }: Props) => {
+const ArticleIntros = ({ defaultValue, defaultTotal, defaultPage = 1, defaultLimit = 10, filterBy }: Props) => {
   const [page, setPage] = useState(defaultPage + 1)
-  const [, { data: { articles: { items = defaultValue, total = 0 } = {} } = {}, fetchMore, client }] =
-    useLazyQuery(ARTICLES)
+  const [, { data: { articles: { items = defaultValue, total = 0 } = {} } = {}, fetchMore, client }] = useLazyQuery(
+    ARTICLES,
+    { variables: { filterBy } }
+  )
 
   useMounted(() => {
     client.writeQuery({
@@ -28,7 +31,8 @@ const Articles = ({ defaultValue, defaultTotal, defaultPage = 1, defaultLimit = 
         paginateBy: {
           page: defaultPage,
           limit: defaultLimit
-        }
+        },
+        filterBy
       },
       data: {
         articles: {
@@ -39,8 +43,8 @@ const Articles = ({ defaultValue, defaultTotal, defaultPage = 1, defaultLimit = 
     })
   })
 
-  useInfiniteScroll<HTMLDivElement>({
-    hasMore: items.length >= total,
+  const [sentinelRef] = useInfiniteScroll<HTMLDivElement>({
+    hasMore: items.length < total,
     onLoadMore: () => {
       fetchMore({
         variables: {
@@ -49,7 +53,7 @@ const Articles = ({ defaultValue, defaultTotal, defaultPage = 1, defaultLimit = 
             limit: 10
           }
         }
-      })
+      }).catch(() => null)
       setPage((_page) => _page + 1)
     }
   })
@@ -71,9 +75,9 @@ const Articles = ({ defaultValue, defaultTotal, defaultPage = 1, defaultLimit = 
         ]
       })}
 
-      {/* <div ref={sentinelRef} /> */}
+      <div ref={sentinelRef} />
     </Box>
   )
 }
 
-export default Articles
+export default ArticleIntros

@@ -10,10 +10,27 @@ import {
   type TypedDocumentNode
 } from '@apollo/client'
 import { onError } from '@apollo/client/link/error'
-import type { Article, QueryArticlesBy } from './article.type'
-import type { Paginated } from './pagination.type'
+import type { Article } from './article.type'
+import type { PaginateBy, Paginated } from './pagination.type'
 import type { Partialable } from '@aiszlab/relax/types'
+import type { Category } from './category.type'
 import { ApplicationToken } from '@/assets/token'
+import { replace } from '@aiszlab/relax'
+
+const mergePaginated = <T>(
+  existing: Partialable<Paginated<T>>,
+  incoming: Paginated<T>,
+  { args }: FieldFunctionOptions<{ paginateBy?: PaginateBy }>
+) => {
+  const { limit = 0, page = 1 } = args?.paginateBy ?? {}
+  const offset = (page - 1) * limit
+
+  return {
+    // lazy load, current page is last page
+    items: replace(existing?.items ?? [], incoming.items, offset, existing?.items.length),
+    total: incoming.total
+  }
+}
 
 const client = new ApolloClient({
   cache: new InMemoryCache({
@@ -21,26 +38,12 @@ const client = new ApolloClient({
       Query: {
         fields: {
           articles: {
-            keyArgs: false,
-
-            merge: (
-              existing: Partialable<Paginated<Article>>,
-              incoming: Paginated<Article>,
-              { args }: FieldFunctionOptions<QueryArticlesBy>
-            ) => {
-              const { limit = 0, page = 1 } = args?.paginateBy ?? {}
-              const offset = (page - 1) * limit
-              const merged = existing?.items.slice(0) ?? []
-
-              incoming.items.forEach((item, index) => {
-                merged[offset + index] = item
-              })
-
-              return {
-                items: merged,
-                total: incoming.total
-              }
-            }
+            keyArgs: ['filterBy', 'paginateBy'],
+            merge: mergePaginated<Article>
+          },
+          articleCategories: {
+            keyArgs: ['filterBy', 'paginateBy'],
+            merge: mergePaginated<Category>
           }
         }
       }

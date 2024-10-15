@@ -1,7 +1,8 @@
 import { ARTICLES } from '@/api/article'
 import { query } from '@/api'
-import Articles from '@/components/articles'
+import ArticleIntros from '@/components/article/intros'
 import { markdownToHtml } from '@/utils/markdown'
+import type { FilterArticlesBy } from '@/api/article.type'
 
 interface Props {
   searchParams?: {
@@ -13,17 +14,19 @@ const PAGE = 1
 const LIMIT = 10
 
 const Page = async ({ searchParams: { category } = {} }: Props) => {
+  const filterBy: FilterArticlesBy = {
+    ...(!!category && {
+      categoryCodes: [category]
+    })
+  }
+
   const { data } = await query(ARTICLES, {
     variables: {
       paginateBy: {
         limit: LIMIT,
         page: PAGE
       },
-      filterBy: {
-        ...(!!category && {
-          categoryCodes: [category]
-        })
-      }
+      filterBy
     }
   })
 
@@ -35,7 +38,13 @@ const Page = async ({ searchParams: { category } = {} }: Props) => {
   )
 
   return (
-    <Articles defaultValue={_articles} defaultTotal={data.articles.total} defaultPage={PAGE} defaultLimit={LIMIT} />
+    <ArticleIntros
+      defaultValue={_articles}
+      defaultTotal={data.articles.total}
+      defaultPage={PAGE}
+      defaultLimit={LIMIT}
+      filterBy={filterBy}
+    />
   )
 }
 

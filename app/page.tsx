@@ -8,17 +8,13 @@ import Box from '@/components/box'
 import { KeyboardArrowRight, KeyboardArrowDown, Github } from 'musae/icons'
 import { useFooterLinks } from './hooks'
 import { useRouter } from 'next/navigation'
-import ArticleCard from '@/components/article-card'
-import CategoryCards from '../components/category-cards'
-import { useQuery } from '@apollo/client'
-import { ARTICLES } from '@/api/article'
+import CategoryCards from '../components/category/cards'
+import ArticleCards from '@/components/article/cards'
 
 const Home = () => {
   const theme = useTheme()
   const footerLinks = useFooterLinks()
   const router = useRouter()
-
-  const { data: { articles: { items: articles = [] } = {} } = {} } = useQuery(ARTICLES, {})
 
   const toCategories = () => {
     router.push('/categories')
@@ -59,7 +55,8 @@ const Home = () => {
             </Button>
           </section>
 
-          <CategoryCards limit={5} className='mt-12' refetch />
+          {/* 首页不需要 ssr */}
+          <CategoryCards limit={5} className='mt-12' lazy />
         </Box>
       </div>
 
@@ -73,19 +70,7 @@ const Home = () => {
             </Button>
           </section>
 
-          <div className='grid grid-cols-5 gap-8 mt-12'>
-            {articles.map((article) => {
-              return (
-                <ArticleCard
-                  id={article.id}
-                  key={article.id}
-                  title={article.title}
-                  createdAt={article.createdAt}
-                  createdBy={article.createdBy}
-                />
-              )
-            })}
-          </div>
+          <ArticleCards />
         </Box>
       </div>
 

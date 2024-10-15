@@ -1,7 +1,7 @@
 import { query } from '@/api'
 import { CATEGORIES } from '@/api/category'
 import Box from '@/components/box'
-import CategoryCards from '@/components/category-cards'
+import CategoryCards from '@/components/category/cards'
 
 const PAGE = 1
 const LIMIT = 20
@@ -19,7 +19,7 @@ const Page = async () => {
   return (
     <Box className='px-10'>
       <CategoryCards
-        defaultValue={data.articleCategories.items}
+        defaultCategories={data.articleCategories.items}
         defaultTotal={data.articleCategories.total}
         defaultPage={PAGE}
         limit={LIMIT}
