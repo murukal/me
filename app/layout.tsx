@@ -3,6 +3,13 @@ import localFont from 'next/font/local'
 import Provided from '@/components/provided'
 import 'musae/styles'
 import './globals.css'
+import { cookies } from 'next/headers'
+import { clsx } from '@aiszlab/relax'
+import { ApplicationToken } from '@/assets/token'
+
+interface Props {
+  children: React.ReactNode
+}
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -20,16 +27,26 @@ export const metadata: Metadata = {
   description: 'welecome to tutu.me'
 }
 
-export default function RootLayout({
-  children
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+const ApplicationLayout = ({ children }: Props) => {
+  const authenticated = cookies().get(ApplicationToken.Authenticated)?.value
+
   return (
     <html lang='zh-cn'>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <head>
+        {!!authenticated && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `globalThis.window.sessionStorage.setItem('${ApplicationToken.Authenticated}', '${authenticated}')`
+            }}
+          />
+        )}
+      </head>
+
+      <body className={clsx(geistSans.variable, geistMono.variable, 'antialiased')}>
         <Provided>{children}</Provided>
       </body>
     </html>
   )
 }
+
+export default ApplicationLayout

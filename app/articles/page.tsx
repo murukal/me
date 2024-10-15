@@ -1,5 +1,5 @@
 import { ARTICLES } from '@/api/article'
-import { client } from '@/api'
+import { query } from '@/api'
 import Articles from '@/components/articles'
 import { markdownToHtml } from '@/utils/markdown'
 
@@ -9,13 +9,15 @@ interface Props {
   }
 }
 
+const PAGE = 1
+const LIMIT = 10
+
 const Page = async ({ searchParams: { category } = {} }: Props) => {
-  const { data } = await client.query({
-    query: ARTICLES,
+  const { data } = await query(ARTICLES, {
     variables: {
       paginateBy: {
-        limit: 10,
-        page: 1
+        limit: LIMIT,
+        page: PAGE
       },
       filterBy: {
         ...(!!category && {
@@ -32,7 +34,9 @@ const Page = async ({ searchParams: { category } = {} }: Props) => {
     }))
   )
 
-  return <Articles defaultValue={_articles} />
+  return (
+    <Articles defaultValue={_articles} defaultTotal={data.articles.total} defaultPage={PAGE} defaultLimit={LIMIT} />
+  )
 }
 
 export default Page

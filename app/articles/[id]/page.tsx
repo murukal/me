@@ -1,6 +1,6 @@
 import { ARTICLE } from '@/api/article'
 import Article from '@/components/article'
-import { client } from '@/api'
+import { query } from '@/api'
 import { markdownToHtml } from '@/utils/markdown'
 
 type Params = {
@@ -8,8 +8,7 @@ type Params = {
 }
 
 const Page = async ({ params }: { params: Params }) => {
-  const { data: { article } = {} } = await client.query({
-    query: ARTICLE,
+  const { data: { article } = {} } = await query(ARTICLE, {
     variables: {
       id: +params.id
     }
