@@ -33,12 +33,12 @@ const Provided = ({ children }: Props) => {
             {children}
           </Bench>
 
-          <Fab>
-            <AddAlert
-              onClick={() => {
-                window.open('https://admin.fantufantu.com/issue')
-              }}
-            />
+          <Fab
+            onClick={() => {
+              window.open('https://admin.fantufantu.com/issue')
+            }}
+          >
+            <AddAlert />
           </Fab>
         </ThemeProvider>
       </ConfigProvider>

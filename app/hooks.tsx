@@ -63,7 +63,8 @@ export const useFooterLinks = () => {
         title: 'get in touch',
         links: [
           {
-            label: 'Feedback'
+            label: 'Feedback',
+            href: 'https://admin.fantufantu.com/issue'
           }
         ]
       },
@@ -71,7 +72,8 @@ export const useFooterLinks = () => {
         title: 'follow us',
         links: [
           {
-            label: 'Github'
+            label: 'Github',
+            href: 'https://github.com/murukal'
           }
         ]
       }
