@@ -41,7 +41,8 @@ const ArticleCard = ({ title, createdAt, id, createdBy }: Props) => {
         <div
           className='grid items-center gap-x-4'
           style={{
-            gridTemplateAreas: '"avatar author" "avatar supporting"'
+            gridTemplateAreas: '"avatar author" "avatar supporting"',
+            gridTemplateColumns: '1fr auto'
           }}
         >
           <Avatar

@@ -5,7 +5,7 @@ export const WHO_AM_I: TypedDocumentNode<{ whoAmI: Who }> = gql`
   query WhoAmI {
     whoAmI {
       id
-      username
+      nickname
       avatar
     }
   }

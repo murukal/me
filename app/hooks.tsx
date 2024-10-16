@@ -61,11 +61,19 @@ export const useFooterLinks = () => {
       },
       {
         title: 'get in touch',
-        links: categoryLinks
+        links: [
+          {
+            label: 'Feedback'
+          }
+        ]
       },
       {
         title: 'follow us',
-        links: categoryLinks
+        links: [
+          {
+            label: 'Github'
+          }
+        ]
       }
     ]
   }, [aboutMeLinks, categoryLinks])

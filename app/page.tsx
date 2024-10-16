@@ -76,7 +76,7 @@ const Home = () => {
 
       {/* footer */}
       <div className='px-10 pb-6 pt-14'>
-        <Box className='flex justify-between gap-20'>
+        <Box className='flex justify-between gap-20 flex-wrap'>
           <section className='flex flex-col gap-5'>
             <h4 className='text-3xl font-semibold'>
               tutu
@@ -93,7 +93,7 @@ const Home = () => {
           </section>
 
           {/* links */}
-          <div className={clsx('flex gap-20', styles['links'])}>
+          <div className={clsx('flex gap-20 flex-wrap', styles.links)}>
             {footerLinks.map(({ links, title }) => {
               return (
                 <section key={title}>
