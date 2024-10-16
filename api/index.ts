@@ -38,11 +38,11 @@ const client = new ApolloClient({
       Query: {
         fields: {
           articles: {
-            keyArgs: ['filterBy', 'paginateBy'],
+            keyArgs: ['filterBy'],
             merge: mergePaginated<Article>
           },
           articleCategories: {
-            keyArgs: ['filterBy', 'paginateBy'],
+            keyArgs: ['filterBy'],
             merge: mergePaginated<Category>
           }
         }
