@@ -50,7 +50,7 @@ const ArticleIntros = ({ defaultValue, defaultTotal, defaultPage = 1, defaultLim
         variables: {
           paginateBy: {
             page: page,
-            limit: 10
+            limit: defaultLimit
           }
         }
       }).catch(() => null)
