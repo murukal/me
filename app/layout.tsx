@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   description: 'welecome to tutu.me'
 }
 
-const ApplicationLayout = ({ children }: Props) => {
+const Layout = ({ children }: Props) => {
   const authenticated = cookies().get(ApplicationToken.Authenticated)?.value
 
   return (
@@ -40,6 +40,13 @@ const ApplicationLayout = ({ children }: Props) => {
             }}
           />
         )}
+
+        <script async src='https://www.googletagmanager.com/gtag/js?id=G-RNQNB5PVNK' />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-RNQNB5PVNK');`
+          }}
+        />
       </head>
 
       <body className={clsx(geistSans.variable, geistMono.variable, 'antialiased')}>
@@ -49,4 +56,4 @@ const ApplicationLayout = ({ children }: Props) => {
   )
 }
 
-export default ApplicationLayout
+export default Layout
