@@ -6,6 +6,7 @@ import './globals.css'
 import { cookies } from 'next/headers'
 import { clsx } from '@aiszlab/relax'
 import { ApplicationToken } from '@/assets/token'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 interface Props {
   children: React.ReactNode
@@ -33,13 +34,6 @@ const Layout = ({ children }: Props) => {
   return (
     <html lang='zh-cn'>
       <head>
-        <script async src='https://www.googletagmanager.com/gtag/js?id=G-RNQNB5PVNK' />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-RNQNB5PVNK');`
-          }}
-        />
-
         {!!authenticated && (
           <script
             dangerouslySetInnerHTML={{
@@ -52,6 +46,8 @@ const Layout = ({ children }: Props) => {
       <body className={clsx(geistSans.variable, geistMono.variable, 'antialiased')}>
         <Provided>{children}</Provided>
       </body>
+
+      <GoogleAnalytics gaId='G-RNQNB5PVNK' />
     </html>
   )
 }

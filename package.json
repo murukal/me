@@ -12,6 +12,7 @@
     "@aiszlab/fuzzy": "^1.4.6",
     "@aiszlab/relax": "^1.4.6",
     "@apollo/client": "^3.11.8",
+    "@next/third-parties": "^14.2.15",
     "dayjs": "^1.11.13",
     "graphql": "^16.9.0",
     "musae": "^0.3.11",
