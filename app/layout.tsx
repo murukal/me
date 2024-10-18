@@ -47,7 +47,7 @@ const Layout = ({ children }: Props) => {
         <Provided>{children}</Provided>
       </body>
 
-      <GoogleAnalytics gaId='G-RNQNB5PVNK' />
+      <GoogleAnalytics gaId='G-YYMJTHY437' />
     </html>
   )
 }
