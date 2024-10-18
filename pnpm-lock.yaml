@@ -27,8 +27,8 @@ importers:
         specifier: ^16.9.0
         version: 16.9.0
       musae:
-        specifier: ^0.3.11
-        version: 0.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(yjs@13.6.20)
+        specifier: 0.3.14-beta.1
+        version: 0.3.14-beta.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(yjs@13.6.20)
       next:
         specifier: 14.2.13
         version: 14.2.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1430,8 +1430,8 @@ packages:
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
-  musae@0.3.11:
-    resolution: {integrity: sha512-ulupZjqqF0zI7Omf8N4gVWJgaZ5IgzLlSD1D+y7IueidMSx14SjgDkzoQURzPJZYGtLc5O4/yAplDnkurmeTSQ==}
+  musae@0.3.14-beta.1:
+    resolution: {integrity: sha512-uyR6TO29JwhroMw1yRlR6aC3ZoIhRN9nxnJNKmY1X9V5cAkXKSwWL0h3Sss6AbTZETbv2LezAjHzkZD9ygJ6dw==}
     engines: {node: '>=18.0.0', pnpm: '>=9'}
     peerDependencies:
       react: ^18
@@ -3773,7 +3773,7 @@ snapshots:
 
   ms@2.1.3: {}
 
-  musae@0.3.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(yjs@13.6.20):
+  musae@0.3.14-beta.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(yjs@13.6.20):
     dependencies:
       '@aiszlab/fuzzy': 1.4.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@aiszlab/relax': 1.4.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
