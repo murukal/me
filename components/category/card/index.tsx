@@ -50,7 +50,7 @@ const CategoryCard = ({ className, style, label, src, code }: Props) => {
           styles['tech-logo']
         )}
       >
-        <Image src={src} alt={label} width={32} height={32} />
+        <Image src={src} alt={label} width={32} height={32} crossOrigin='anonymous' />
       </div>
       <span className='text-2xl font-bold'>{label}</span>
     </div>
