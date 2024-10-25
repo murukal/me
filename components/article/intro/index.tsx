@@ -4,7 +4,7 @@ import type { Who } from '@/api/authentication.type'
 import type { Category } from '@/api/category.type'
 import { useRandomAvatar } from '@/hooks/use-random-avatar'
 import dayjs from 'dayjs'
-import { Avatar, Button, Tag } from 'musae'
+import { Avatar, IconButton, Tag } from 'musae'
 import { useRouter } from 'next/navigation'
 import { Visibility } from 'musae/icons'
 
@@ -57,9 +57,9 @@ const ArticleIntro = ({ content, title, createdBy: { avatar, nickname }, created
         })}
 
         <div className='ml-auto'>
-          <Button variant='text' shape='circular' onClick={toArticle}>
+          <IconButton variant='text' onClick={toArticle}>
             <Visibility size={20} />
-          </Button>
+          </IconButton>
         </div>
       </div>
     </section>

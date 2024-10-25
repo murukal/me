@@ -1,8 +1,8 @@
+import './globals.css'
+
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import Provided from '@/components/provided'
-import 'musae/styles'
-import './globals.css'
 import { cookies } from 'next/headers'
 import { clsx } from '@aiszlab/relax'
 import { ApplicationToken } from '@/assets/token'

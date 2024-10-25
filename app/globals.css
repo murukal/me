@@ -1,3 +1,6 @@
-@tailwind base;
+@layer tailwindcss-base {
+  @tailwind base;
+}
+
 @tailwind components;
 @tailwind utilities;
