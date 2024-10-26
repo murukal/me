@@ -17,6 +17,7 @@ const geistSans = localFont({
   variable: '--font-geist-sans',
   weight: '100 900'
 })
+
 const geistMono = localFont({
   src: './fonts/GeistMonoVF.woff',
   variable: '--font-geist-mono',
@@ -47,7 +48,7 @@ const Layout = ({ children }: Props) => {
         <Provided>{children}</Provided>
       </body>
 
-      <GoogleAnalytics gaId='G-YYMJTHY437' />
+      <GoogleAnalytics gaId='G-PSXENQ5JKD' />
     </html>
   )
 }

@@ -2,27 +2,36 @@
 
 import type { Article as ArticleType } from '@/api/article.type'
 import Box from '../box'
-import { useTheme } from 'musae'
+import { Skeleton, useTheme, VisuallyHidden } from 'musae'
 import dayjs from 'dayjs'
 import ArticleFooter from './footer'
-import { lazy, Suspense } from 'react'
+import dynamic from 'next/dynamic'
 
 interface Props {
   article: ArticleType
   html: string
 }
 
-const RichTextEditor = lazy(() => import('musae').then(({ RichTextEditor }) => ({ default: RichTextEditor })))
-
 const Article = ({ article, html }: Props) => {
   const theme = useTheme()
+
+  const RichTextEditor = dynamic(() => import('musae').then(({ RichTextEditor }) => RichTextEditor), {
+    ssr: false,
+    loading: () => {
+      return (
+        <Skeleton className='h-80 rounded-lg'>
+          <VisuallyHidden dangerouslySetInnerHTML={{ __html: html }} />
+        </Skeleton>
+      )
+    }
+  })
 
   return (
     <Box className='text-base p-5'>
       <h2 className='text-4xl font-bold'>{article.title}</h2>
 
       <p
-        className='mt-5'
+        className='mt-5 mb-8'
         style={{
           color: theme.colors.secondary
         }}
@@ -30,9 +39,7 @@ const Article = ({ article, html }: Props) => {
         {dayjs(article.createdAt).format('MMM DD')}
       </p>
 
-      <Suspense fallback={<div dangerouslySetInnerHTML={{ __html: html }} />}>
-        <RichTextEditor className='mt-8' defaultValue={article.content} use='markdown' disabled />
-      </Suspense>
+      <RichTextEditor defaultValue={article.content} use='markdown' disabled />
 
       <ArticleFooter />
     </Box>
