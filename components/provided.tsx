@@ -7,7 +7,7 @@ import { client } from '@/api'
 import { ApolloProvider } from '@apollo/client'
 import Account from './account'
 import Logo from './logo'
-import { AddAlert } from 'musae/icons'
+import { WindPower } from 'musae/icons'
 import dynamic from 'next/dynamic'
 
 interface Props {
@@ -38,7 +38,7 @@ const Provided = ({ children }: Props) => {
               window.open('https://admin.fantufantu.com/issue')
             }}
           >
-            <AddAlert />
+            <WindPower />
           </Fab>
         </ThemeProvider>
       </ConfigProvider>
