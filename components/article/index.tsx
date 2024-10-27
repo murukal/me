@@ -6,6 +6,7 @@ import { Skeleton, useTheme, VisuallyHidden } from 'musae'
 import dayjs from 'dayjs'
 import ArticleFooter from './footer'
 import dynamic from 'next/dynamic'
+import { useDefault } from '@aiszlab/relax'
 
 interface Props {
   article: ArticleType
@@ -15,15 +16,17 @@ interface Props {
 const Article = ({ article, html }: Props) => {
   const theme = useTheme()
 
-  const RichTextEditor = dynamic(() => import('musae').then(({ RichTextEditor }) => RichTextEditor), {
-    ssr: false,
-    loading: () => {
-      return (
-        <Skeleton className='h-80 rounded-lg'>
-          <VisuallyHidden dangerouslySetInnerHTML={{ __html: html }} />
-        </Skeleton>
-      )
-    }
+  const RichTextEditor = useDefault(() => {
+    return dynamic(() => import('musae').then(({ RichTextEditor }) => RichTextEditor), {
+      ssr: false,
+      loading: () => {
+        return (
+          <Skeleton className='h-80 rounded-lg'>
+            <VisuallyHidden dangerouslySetInnerHTML={{ __html: html }} />
+          </Skeleton>
+        )
+      }
+    })
   })
 
   return (

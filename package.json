@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@aiszlab/fuzzy": "^1.5.2",
-    "@aiszlab/relax": "^1.5.2",
+    "@aiszlab/fuzzy": "^1.5.3",
+    "@aiszlab/relax": "^1.5.3",
     "@apollo/client": "^3.11.8",
     "@next/third-parties": "^14.2.16",
     "dayjs": "^1.11.13",
