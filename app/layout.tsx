@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import Provided from '@/components/provided'
 import { cookies } from 'next/headers'
-import { clsx } from '@aiszlab/relax'
+import { stringify } from '@aiszlab/relax/class-name'
 import { ApplicationToken } from '@/assets/token'
 import { GoogleAnalytics } from '@next/third-parties/google'
 
@@ -44,7 +44,7 @@ const Layout = ({ children }: Props) => {
         )}
       </head>
 
-      <body className={clsx(geistSans.variable, geistMono.variable, 'antialiased')}>
+      <body className={stringify(geistSans.variable, geistMono.variable, 'antialiased')}>
         <Provided>{children}</Provided>
       </body>
 

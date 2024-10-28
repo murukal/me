@@ -4,7 +4,7 @@ import { ARTICLES } from '@/api/article'
 import { useQuery } from '@apollo/client'
 import ArticleCard from '../card'
 import { Skeleton } from 'musae'
-import { clsx } from '@aiszlab/relax'
+import { stringify } from '@aiszlab/relax/class-name'
 
 interface Props {
   className?: string
@@ -23,7 +23,7 @@ const ArticleCards = ({ className }: Props) => {
   })
 
   return (
-    <div className={clsx('grid gap-8 mt-12', 'lg:grid-cols-4 sm:grid-cols-2 grid-cols-1', className)}>
+    <div className={stringify('grid gap-8 mt-12', 'lg:grid-cols-4 sm:grid-cols-2 grid-cols-1', className)}>
       {loading &&
         Array.from({ length: LIMIT }).map((_, index) => {
           return <Skeleton className='h-80' key={index} />

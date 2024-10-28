@@ -1,7 +1,7 @@
 'use client'
 
 import type { CSSProperties, ReactNode } from 'react'
-import { clsx } from '@aiszlab/relax'
+import { stringify } from '@aiszlab/relax/class-name'
 
 interface Props {
   children: ReactNode
@@ -11,7 +11,7 @@ interface Props {
 
 const Box = ({ children, className, style }: Props) => {
   return (
-    <div className={clsx('max-w-[120ch] mx-auto', className)} style={style}>
+    <div className={stringify('max-w-[120ch] mx-auto', className)} style={style}>
       {children}
     </div>
   )

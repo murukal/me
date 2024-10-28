@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@aiszlab/fuzzy':
-        specifier: ^1.5.3
-        version: 1.5.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^1.5.4
+        version: 1.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@aiszlab/relax':
-        specifier: ^1.5.3
-        version: 1.5.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^1.5.4
+        version: 1.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@apollo/client':
         specifier: ^3.11.8
         version: 3.11.8(@types/react@18.3.12)(graphql@16.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -27,8 +27,8 @@ importers:
         specifier: ^16.9.0
         version: 16.9.0
       musae:
-        specifier: 0.5.3
-        version: 0.5.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(yjs@13.6.20)
+        specifier: ^0.5.4
+        version: 0.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(yjs@13.6.20)
       next:
         specifier: 14.2.13
         version: 14.2.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -81,11 +81,11 @@ importers:
 
 packages:
 
-  '@aiszlab/fuzzy@1.5.3':
-    resolution: {integrity: sha512-dgn2VNpZ2wU82MpfrvPhpVk3jpwpXqouuElqgMqrEARj/kxN3JOE7I+gN9EkTG2TI6KflURSNZ5W0nLS7q18DQ==}
+  '@aiszlab/fuzzy@1.5.4':
+    resolution: {integrity: sha512-j5ShTyHPLaBQc5LehbNsP4JUJEajWfcufBoDTVzMtf0EtLiInZDa8S70OR1xRRPuoSXPKWWygDSHALaRkhPJWw==}
 
-  '@aiszlab/relax@1.5.3':
-    resolution: {integrity: sha512-KlFoY/Hr08Yiit++NSYLF2kMBwj6TEtZjfnuc4nhdBe70d4v+ItQi7qGiYac/W/xBCIYgVKHnE9AfshnGfv9pg==}
+  '@aiszlab/relax@1.5.4':
+    resolution: {integrity: sha512-t0TbjKSxt7c40QfRREgLKaUa6c/1bWpzSoNNtToV5oY07+E3q/IDrkLexfkLrj4QIJ+cCqWO6QWdzsGm3MF6xA==}
     peerDependencies:
       react: '18'
       react-dom: '18'
@@ -128,8 +128,8 @@ packages:
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
 
-  '@eslint-community/regexpp@4.12.0':
-    resolution: {integrity: sha512-gh7PdNombP8ftL8TinYC8Xd7WEypB8EKV4PI2h0eMzndKjPCXuo2zUiZtD2Hu+MSPt02Ty2MdS788ADl9ai1rA==}
+  '@eslint-community/regexpp@4.12.1':
+    resolution: {integrity: sha512-CCZCDJuduB9OUkFkY2IgppNZMi2lBQgD2qzwXkEia16cge2pijY/aXi96CJMquDMn3nJdlPV1A5KrJEXwfLNzQ==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
 
   '@eslint/eslintrc@2.1.4':
@@ -612,8 +612,8 @@ packages:
     resolution: {integrity: sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==}
     engines: {node: '>= 6'}
 
-  caniuse-lite@1.0.30001672:
-    resolution: {integrity: sha512-XhW1vRo1ob6aeK2w3rTohwTPBLse/rvjq+s3RTSBwnlZqoFFjx9cHsShJjAIbLsLjyoacaTxpLZy9v3gg6zypw==}
+  caniuse-lite@1.0.30001673:
+    resolution: {integrity: sha512-WTrjUCSMp3LYX0nE12ECkV0a+e6LC85E0Auz75555/qr78Oc8YWhEPNfDd6SHdtlCMSzqtuXY0uyEMNRcsKpKw==}
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -1401,8 +1401,8 @@ packages:
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
-  musae@0.5.3:
-    resolution: {integrity: sha512-AGpPAY7vnOTPVVydzwuvpoWLmK5iTh6002GwedYUijX8kUAqGKAKZNgaq5Nv7fvUzJTRN0pqeUOv/X9cVYsmTQ==}
+  musae@0.5.4:
+    resolution: {integrity: sha512-jmle+iC4YBDMyuBPsR57ENhuIKIarlIYH3c0LRRoa95Xf8Bi9MP20uVGkZsf43H14FEKXoaUOGUiVzTvU92xtg==}
     engines: {node: '>=18.0.0', pnpm: '>=9'}
     peerDependencies:
       react: ^18
@@ -2017,15 +2017,15 @@ packages:
 
 snapshots:
 
-  '@aiszlab/fuzzy@1.5.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@aiszlab/fuzzy@1.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@aiszlab/relax': 1.5.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@aiszlab/relax': 1.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@babel/runtime': 7.26.0
     transitivePeerDependencies:
       - react
       - react-dom
 
-  '@aiszlab/relax@1.5.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@aiszlab/relax@1.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.26.0
       react: 18.3.1
@@ -2073,7 +2073,7 @@ snapshots:
       eslint: 8.57.1
       eslint-visitor-keys: 3.4.3
 
-  '@eslint-community/regexpp@4.12.0': {}
+  '@eslint-community/regexpp@4.12.1': {}
 
   '@eslint/eslintrc@2.1.4':
     dependencies:
@@ -2401,7 +2401,7 @@ snapshots:
 
   '@typescript-eslint/eslint-plugin@8.11.0(@typescript-eslint/parser@8.11.0(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)(typescript@5.6.3)':
     dependencies:
-      '@eslint-community/regexpp': 4.12.0
+      '@eslint-community/regexpp': 4.12.1
       '@typescript-eslint/parser': 8.11.0(eslint@8.57.1)(typescript@5.6.3)
       '@typescript-eslint/scope-manager': 8.11.0
       '@typescript-eslint/type-utils': 8.11.0(eslint@8.57.1)(typescript@5.6.3)
@@ -2648,7 +2648,7 @@ snapshots:
 
   camelcase-css@2.0.1: {}
 
-  caniuse-lite@1.0.30001672: {}
+  caniuse-lite@1.0.30001673: {}
 
   ccount@2.0.1: {}
 
@@ -3012,7 +3012,7 @@ snapshots:
   eslint@8.57.1:
     dependencies:
       '@eslint-community/eslint-utils': 4.4.1(eslint@8.57.1)
-      '@eslint-community/regexpp': 4.12.0
+      '@eslint-community/regexpp': 4.12.1
       '@eslint/eslintrc': 2.1.4
       '@eslint/js': 8.57.1
       '@humanwhocodes/config-array': 0.13.0
@@ -3673,10 +3673,10 @@ snapshots:
 
   ms@2.1.3: {}
 
-  musae@0.5.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(yjs@13.6.20):
+  musae@0.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(yjs@13.6.20):
     dependencies:
-      '@aiszlab/fuzzy': 1.5.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@aiszlab/relax': 1.5.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@aiszlab/fuzzy': 1.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@aiszlab/relax': 1.5.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@babel/runtime': 7.26.0
       '@emotion/is-prop-valid': 1.3.1
       '@floating-ui/dom': 1.6.11
@@ -3714,7 +3714,7 @@ snapshots:
       '@next/env': 14.2.13
       '@swc/helpers': 0.5.5
       busboy: 1.6.0
-      caniuse-lite: 1.0.30001672
+      caniuse-lite: 1.0.30001673
       graceful-fs: 4.2.11
       postcss: 8.4.31
       react: 18.3.1

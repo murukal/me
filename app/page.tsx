@@ -2,7 +2,7 @@
 
 import LearnCoding from '@/components/learn-coding'
 import styles from './styles.module.css'
-import { clsx } from '@aiszlab/relax'
+import { stringify } from '@aiszlab/relax/class-name'
 import { Quote, Button, useTheme, Divider } from 'musae'
 import Box from '@/components/box'
 import { KeyboardArrowRight, KeyboardArrowDown, Github } from 'musae/icons'
@@ -35,7 +35,7 @@ const Home = () => {
             <Quote>Make sure you subscribe to get the latest updates</Quote>
           </section>
 
-          <div className={clsx('w-full justify-self-center', styles.selfie)}>
+          <div className={stringify('w-full justify-self-center', styles.selfie)}>
             <LearnCoding />
           </div>
         </Box>
@@ -93,7 +93,7 @@ const Home = () => {
           </section>
 
           {/* links */}
-          <div className={clsx('flex gap-20 flex-wrap', styles.links)}>
+          <div className={stringify('flex gap-20 flex-wrap', styles.links)}>
             {footerLinks.map(({ links, title }) => {
               return (
                 <section key={title}>

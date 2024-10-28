@@ -2,7 +2,7 @@
 
 import { type CSSProperties } from 'react'
 import styles from './styles.module.css'
-import { clsx } from '@aiszlab/relax'
+import { stringify } from '@aiszlab/relax/class-name'
 import { useTheme, Image } from 'musae'
 import { useRouter } from 'next/navigation'
 
@@ -27,7 +27,7 @@ const CategoryCard = ({ className, style, label, src, code }: Props) => {
 
   return (
     <div
-      className={clsx(
+      className={stringify(
         'pl-7 pt-8 h-52 rounded-md hover:shadow-2xl transition-all cursor-pointer select-none',
         'flex flex-col gap-8',
         styles.category,
@@ -44,7 +44,7 @@ const CategoryCard = ({ className, style, label, src, code }: Props) => {
       onClick={toArticles}
     >
       <div
-        className={clsx(
+        className={stringify(
           'w-14 h-14 transition-colors rounded-md',
           'flex justify-center items-center',
           styles['tech-logo']
