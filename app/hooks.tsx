@@ -40,7 +40,7 @@ export const useFooterLinks = () => {
     return [
       {
         label: 'Homepage',
-        href: 'https://dev.fantufantu.com/about-us'
+        href: 'https://aisz.dev/about-us'
       },
       {
         label: 'Github',
