@@ -16,16 +16,18 @@ interface Props {
 const Article = ({ article, html }: Props) => {
   const theme = useTheme()
 
+  const loading = useDefault(() => {
+    return (
+      <Skeleton className='h-[800px] rounded-lg'>
+        <VisuallyHidden dangerouslySetInnerHTML={{ __html: html }} />
+      </Skeleton>
+    )
+  })
+
   const RichTextEditor = useDefault(() => {
     return dynamic(() => import('musae').then(({ RichTextEditor }) => RichTextEditor), {
       ssr: false,
-      loading: () => {
-        return (
-          <Skeleton className='h-80 rounded-lg'>
-            <VisuallyHidden dangerouslySetInnerHTML={{ __html: html }} />
-          </Skeleton>
-        )
-      }
+      loading: () => loading
     })
   })
 
@@ -42,7 +44,7 @@ const Article = ({ article, html }: Props) => {
         {dayjs(article.createdAt).format('MMM DD')}
       </p>
 
-      <RichTextEditor defaultValue={article.content} use='markdown' disabled />
+      <RichTextEditor defaultValue={article.content} use='markdown' disabled fallback={loading} />
 
       <ArticleFooter />
     </Box>
