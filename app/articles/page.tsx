@@ -3,6 +3,7 @@ import { query } from '@/api'
 import ArticleIntros from '@/components/article/intros'
 import { markdownToHtml } from '@/utils/markdown'
 import type { FilterArticlesBy } from '@/api/article.type'
+import { redirect } from 'next/navigation'
 
 interface Props {
   searchParams?: {
@@ -29,6 +30,10 @@ const Page = async ({ searchParams: { category } = {} }: Props) => {
       filterBy
     }
   })
+
+  if (data.articles.items.length === 0) {
+    redirect('/404')
+  }
 
   const _articles = await Promise.all(
     data.articles.items.map(async (_article) => ({

@@ -7,9 +7,10 @@ import { cookies } from 'next/headers'
 import { stringify } from '@aiszlab/relax/class-name'
 import { ApplicationToken } from '@/assets/token'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { type ReactNode } from 'react'
 
 interface Props {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 const geistSans = localFont({
