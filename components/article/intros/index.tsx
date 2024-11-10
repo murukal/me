@@ -60,7 +60,7 @@ const ArticleIntros = ({ defaultValue, defaultTotal, defaultPage = 1, defaultLim
 
   return (
     <Box className='p-5'>
-      {items.map((_article) => {
+      {items.map((_article, index) => {
         return [
           <ArticleIntro
             content={_article.content}
@@ -71,7 +71,7 @@ const ArticleIntros = ({ defaultValue, defaultTotal, defaultPage = 1, defaultLim
             createdAt={_article.createdAt}
             categories={_article.categories}
           />,
-          <Divider key={`${_article.id}-separator`} margin={[40, 24]} />
+          index !== items.length - 1 && <Divider key={`${_article.id}-separator`} margin={[40, 24]} />
         ]
       })}
 
