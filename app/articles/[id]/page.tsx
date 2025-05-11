@@ -1,27 +1,25 @@
-import { ARTICLE } from '@/api/article'
-import Article from '@/components/article'
-import { query } from '@/api'
-import { markdownToHtml } from '@/utils/markdown'
-import { redirect } from 'next/navigation'
+import { ARTICLE } from "@/api/article";
+import Article from "@/components/article";
+import { query } from "@/api";
+import { redirect } from "next/navigation";
 
 type Params = {
-  id: string
-}
+  id: string;
+};
 
-const Page = async ({ params }: { params: Params }) => {
+const Page = async ({ params }: { params: Promise<Params> }) => {
   const _response = await query(ARTICLE, {
     variables: {
-      id: +params.id
-    }
-  }).catch(() => null)
-  const article = _response?.data.article
-  const html = await markdownToHtml(article?.content)
+      id: +(await params).id,
+    },
+  }).catch(() => null);
+  const article = _response?.data.article;
 
   if (!article) {
-    redirect('/404')
+    redirect("/404");
   }
 
-  return <Article article={article} html={html} />
-}
+  return <Article article={article} />;
+};
 
-export default Page
+export default Page;
