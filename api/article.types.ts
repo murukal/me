@@ -1,6 +1,6 @@
-import type { Who } from './authentication.type'
-import type { Category } from './category.type'
-import type { PaginateBy } from './pagination.type'
+import type { Who } from './authentication.types'
+import type { Category } from './category.types'
+import type { PaginateBy } from './pagination.types'
 
 export interface Article {
   id: number

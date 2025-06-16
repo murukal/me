@@ -1,7 +1,7 @@
 'use client'
 
-import type { Who } from '@/api/authentication.type'
-import type { Category } from '@/api/category.type'
+import type { Who } from '@/api/authentication.types'
+import type { Category } from '@/api/category.types'
 import { useRandomAvatar } from '@/hooks/use-random-avatar'
 import dayjs from 'dayjs'
 import { Avatar, IconButton, Tag } from 'musae'

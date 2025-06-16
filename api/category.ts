@@ -1,6 +1,6 @@
 import { gql, TypedDocumentNode } from '@apollo/client'
-import type { Category, FilterCategoriesBy } from './category.type'
-import type { PaginateBy, Paginated } from './pagination.type'
+import type { Category, FilterCategoriesBy } from './category.types'
+import type { PaginateBy, Paginated } from './pagination.types'
 
 /**
  * @description

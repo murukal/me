@@ -1,6 +1,6 @@
-import type { FilterArticlesBy, Article } from './article.type'
+import type { FilterArticlesBy, Article } from './article.types'
 import { gql, type TypedDocumentNode } from '@apollo/client'
-import type { PaginateBy, Paginated } from './pagination.type'
+import type { PaginateBy, Paginated } from './pagination.types'
 
 export const ARTICLES: TypedDocumentNode<
   { articles: Paginated<Article> },

@@ -4,7 +4,7 @@ import { Avatar, Image } from 'musae'
 import dayjs from 'dayjs'
 import { useRouter } from 'next/navigation'
 import { useRandomAvatar } from '@/hooks/use-random-avatar'
-import type { Who } from '@/api/authentication.type'
+import type { Who } from '@/api/authentication.types'
 
 interface Props {
   title: string

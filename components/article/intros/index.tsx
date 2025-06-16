@@ -1,6 +1,6 @@
 'use client'
 
-import type { Article, FilterArticlesBy } from '@/api/article.type'
+import type { Article, FilterArticlesBy } from '@/api/article.types'
 import Box from '../../box'
 import { useInfiniteScroll, useMounted } from '@aiszlab/relax'
 import ArticleIntro from '../intro'

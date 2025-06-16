@@ -1,20 +1,19 @@
 import { NextResponse, type NextRequest } from 'next/server'
-
-const AUTHENTICATED = 'authenticated'
+import { ApplicationToken } from './assets/token'
 
 const middleware = (request: NextRequest) => {
-  const hasAuthenticated = request.nextUrl.searchParams.has(AUTHENTICATED)
+  const hasAuthenticated = request.nextUrl.searchParams.has(ApplicationToken.Authenticated)
 
   if (hasAuthenticated) {
-    const _authenticated = request.nextUrl.searchParams.get(AUTHENTICATED)
+    const _authenticated = request.nextUrl.searchParams.get(ApplicationToken.Authenticated)
     const url = new URL(request.url)
-    url.searchParams.delete(AUTHENTICATED)
+    url.searchParams.delete(ApplicationToken.Authenticated)
     const response = NextResponse.redirect(url)
 
     if (_authenticated) {
       response.cookies.set({
         httpOnly: true,
-        name: AUTHENTICATED,
+        name: ApplicationToken.Authenticated,
         value: _authenticated
       })
     }
