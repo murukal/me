@@ -4,6 +4,6 @@ export interface Category {
   image: string
 }
 
-export interface FilterCategoriesBy {
+export interface FilterArticleCategoriesInput {
   keyword?: string
 }

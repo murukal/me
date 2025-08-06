@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation'
 import CategoryCards from '../components/category/cards'
 import ArticleCards from '@/components/article/cards'
 
-const Home = () => {
+const Page = () => {
   const theme = useTheme()
   const footerLinks = useFooterLinks()
   const router = useRouter()
@@ -145,4 +145,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Page

@@ -1,6 +1,6 @@
 import { gql, TypedDocumentNode } from '@apollo/client'
-import type { Category, FilterCategoriesBy } from './category.types'
-import type { PaginateBy, Paginated } from './pagination.types'
+import type { Category, FilterArticleCategoriesInput } from './category.types'
+import type { Pagination, Paginated } from './pagination.types'
 
 /**
  * @description
@@ -9,12 +9,12 @@ import type { PaginateBy, Paginated } from './pagination.types'
 export const CATEGORIES: TypedDocumentNode<
   { articleCategories: Paginated<Category> },
   {
-    filterBy?: FilterCategoriesBy
-    paginateBy?: PaginateBy
+    filter?: FilterArticleCategoriesInput
+    pagination?: Pagination
   }
 > = gql`
-  query Categories($filterBy: FilterArticleCategoriesBy, $paginateBy: PaginateBy) {
-    articleCategories(filterBy: $filterBy, paginateBy: $paginateBy) {
+  query Categories($filter: FilterArticleCategoriesInput, $pagination: Pagination) {
+    articleCategories(filter: $filter, pagination: $pagination) {
       items {
         code
         name

@@ -9,7 +9,7 @@ const LIMIT = 20
 const Page = async () => {
   const { data } = await query(CATEGORIES, {
     variables: {
-      paginateBy: {
+      pagination: {
         page: PAGE,
         limit: LIMIT
       }

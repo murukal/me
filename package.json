@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@aiszlab/fuzzy": "^2.0.5",
-    "@aiszlab/relax": "^2.0.5",
+    "@aiszlab/relax": "2.0.6-beta.7",
     "@apollo/client": "^3.13.8",
     "@next/third-parties": "^15.3.2",
     "dayjs": "^1.11.13",

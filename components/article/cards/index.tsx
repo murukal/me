@@ -15,7 +15,7 @@ const LIMIT = 4
 const ArticleCards = ({ className }: Props) => {
   const { data: { articles: { items: articles = [] } = {} } = {}, loading } = useQuery(ARTICLES, {
     variables: {
-      paginateBy: {
+      pagination: {
         page: 1,
         limit: LIMIT
       }

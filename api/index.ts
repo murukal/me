@@ -11,18 +11,17 @@ import {
 } from '@apollo/client'
 import { onError } from '@apollo/client/link/error'
 import type { Article } from './article.types'
-import type { PaginateBy, Paginated } from './pagination.types'
+import type { Pagination, Paginated } from './pagination.types'
 import type { Partialable } from '@aiszlab/relax/types'
 import type { Category } from './category.types'
-import { ApplicationToken } from '@/assets/token'
-import { replace } from '@aiszlab/relax'
+import { tryAuthenticate } from '@aiszlab/relax/next'
 
 const mergePaginated = <T>(
   existing: Partialable<Paginated<T>>,
   incoming: Paginated<T>,
-  { args }: FieldFunctionOptions<{ paginateBy?: PaginateBy }>
+  { args }: FieldFunctionOptions<{ pagination?: Pagination }>
 ) => {
-  const { limit = 0, page = 1 } = args?.paginateBy ?? {}
+  const { limit = 0, page = 1 } = args?.pagination ?? {}
   const offset = (page - 1) * limit
   const total = incoming.total
 
@@ -43,11 +42,11 @@ const client = new ApolloClient({
       Query: {
         fields: {
           articles: {
-            keyArgs: ['filterBy'],
+            keyArgs: ['filter'],
             merge: mergePaginated<Article>
           },
           articleCategories: {
-            keyArgs: ['filterBy'],
+            keyArgs: ['filter'],
             merge: mergePaginated<Category>
           }
         }
@@ -57,6 +56,8 @@ const client = new ApolloClient({
 
   link: from([
     onError(({ graphQLErrors, networkError }) => {
+      console.log('graphQLErrors====', graphQLErrors)
+
       const errorMessage = graphQLErrors?.[0].message ?? networkError?.message
       if (!errorMessage) return
 
@@ -74,17 +75,7 @@ const client = new ApolloClient({
     createHttpLink({
       uri: 'https://api.fantufantu.com',
       fetch: async (uri, options) => {
-        const _authenticated = (
-          await Promise.all([
-            new Promise((resolve) =>
-              resolve(globalThis.window.sessionStorage.getItem(ApplicationToken.Authenticated))
-            ).catch(() => null),
-            import('next/headers')
-              .then(async ({ cookies }) => (await cookies()).get(ApplicationToken.Authenticated)?.value)
-              .catch(() => null)
-          ])
-        ).find((_) => !!_)
-
+        const _authenticated = await tryAuthenticate().catch(() => null)
         const _headers = new Headers(options?.headers)
 
         if (_authenticated) {

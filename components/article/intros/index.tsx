@@ -1,6 +1,6 @@
 'use client'
 
-import type { Article, FilterArticlesBy } from '@/api/article.types'
+import type { Article, FilterArticlesInput } from '@/api/article.types'
 import Box from '../../box'
 import { useInfiniteScroll, useMounted } from '@aiszlab/relax'
 import ArticleIntro from '../intro'
@@ -14,25 +14,25 @@ interface Props {
   defaultTotal: number
   defaultPage?: number
   defaultLimit?: number
-  filterBy?: FilterArticlesBy
+  filter?: FilterArticlesInput
 }
 
-const ArticleIntros = ({ defaultValue, defaultTotal, defaultPage = 1, defaultLimit = 10, filterBy }: Props) => {
+const ArticleIntros = ({ defaultValue, defaultTotal, defaultPage = 1, defaultLimit = 10, filter }: Props) => {
   const [page, setPage] = useState(defaultPage + 1)
   const [, { data: { articles: { items = defaultValue, total = 0 } = {} } = {}, fetchMore, client }] = useLazyQuery(
     ARTICLES,
-    { variables: { filterBy } }
+    { variables: { filter } }
   )
 
   useMounted(() => {
     client.writeQuery({
       query: ARTICLES,
       variables: {
-        paginateBy: {
+        pagination: {
           page: defaultPage,
           limit: defaultLimit
         },
-        filterBy
+        filter
       },
       data: {
         articles: {
@@ -43,12 +43,12 @@ const ArticleIntros = ({ defaultValue, defaultTotal, defaultPage = 1, defaultLim
     })
   })
 
-  const [sentinelRef] = useInfiniteScroll<HTMLDivElement>({
+  const { sentinelRef } = useInfiniteScroll<HTMLDivElement>({
     hasMore: items.length < total,
     onLoadMore: () => {
       fetchMore({
         variables: {
-          paginateBy: {
+          pagination: {
             page: page,
             limit: defaultLimit
           }

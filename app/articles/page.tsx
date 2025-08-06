@@ -1,7 +1,7 @@
 import { ARTICLES } from '@/api/article'
 import { query } from '@/api'
 import ArticleIntros from '@/components/article/intros'
-import type { FilterArticlesBy } from '@/api/article.types'
+import type { FilterArticlesInput } from '@/api/article.types'
 import { redirect } from 'next/navigation'
 
 interface Props {
@@ -16,7 +16,7 @@ const LIMIT = 10
 const Page = async ({ searchParams }: Props) => {
   const { category } = await searchParams
 
-  const filterBy: FilterArticlesBy = {
+  const filter: FilterArticlesInput = {
     ...(!!category && {
       categoryCodes: [category]
     })
@@ -24,11 +24,11 @@ const Page = async ({ searchParams }: Props) => {
 
   const { data } = await query(ARTICLES, {
     variables: {
-      paginateBy: {
+      pagination: {
         limit: LIMIT,
         page: PAGE
       },
-      filterBy
+      filter
     }
   })
 
@@ -42,7 +42,7 @@ const Page = async ({ searchParams }: Props) => {
       defaultTotal={data.articles.total}
       defaultPage={PAGE}
       defaultLimit={LIMIT}
-      filterBy={filterBy}
+      filter={filter}
     />
   )
 }

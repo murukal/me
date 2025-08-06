@@ -46,7 +46,7 @@ const CategoryCards = ({
     client.writeQuery({
       query: CATEGORIES,
       variables: {
-        paginateBy: {
+        pagination: {
           page: defaultPage,
           limit
         }
@@ -65,7 +65,7 @@ const CategoryCards = ({
 
     await queryCategories({
       variables: {
-        paginateBy: {
+        pagination: {
           page: defaultPage,
           limit
         }
@@ -74,12 +74,12 @@ const CategoryCards = ({
     }).catch(() => null)
   })
 
-  const [] = useInfiniteScroll({
+  const {} = useInfiniteScroll({
     hasMore: more && items.length < total,
     onLoadMore: () => {
       fetchMore({
         variables: {
-          paginateBy: {
+          pagination: {
             page,
             limit
           }
