@@ -132,13 +132,16 @@ const Page = () => {
         <Divider className='max-w-screen-2xl mx-auto' orientation='horizontal' margin={[50, 26]} />
 
         <Box
-          className='flex justify-between text-sm'
+          className='flex text-sm gap-4'
           style={{
             color: theme.colors.secondary
           }}
         >
-          <span>© 2024 fantufantu</span>
-          <span>Made With ❤️ tutu & fanfan</span>
+          <span>© 2025 fantufantu</span>
+          <a href='https://beian.miit.gov.cn/' target='_blank'>
+            浙ICP备2024126066号
+          </a>
+          <span className='ml-auto'>Made With ❤️ tutu & fanfan</span>
         </Box>
       </div>
     </div>

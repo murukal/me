@@ -6,7 +6,8 @@ import Provided from '@/components/provided'
 import { stringify } from '@aiszlab/relax/class-name'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { type ReactNode } from 'react'
-import { Authenticated } from '@aiszlab/relax/next'
+import { cookies } from 'next/headers'
+import { AUTHENTICATION_TOKEN } from '@/constants/authentication'
 
 interface Props {
   children: ReactNode
@@ -17,15 +18,23 @@ const geist = Geist({
 })
 
 export const metadata: Metadata = {
-  title: 'tutu.me',
+  title: '我的技术站点 - tutu.me',
   description: 'welecome to tutu.me'
 }
 
 const Layout = async ({ children }: Props) => {
+  const authenticated = (await cookies()).get(AUTHENTICATION_TOKEN.authentication)?.value ?? null
+
   return (
     <html lang='zh-cn'>
       <head>
-        <Authenticated />
+        {!!authenticated && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `sessionStorage.setItem('${AUTHENTICATION_TOKEN.authentication}', '${authenticated}')`
+            }}
+          />
+        )}
       </head>
 
       <body className={stringify(geist.className)}>

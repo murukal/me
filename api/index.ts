@@ -14,7 +14,8 @@ import type { Article } from './article.types'
 import type { Pagination, Paginated } from './pagination.types'
 import type { Partialable } from '@aiszlab/relax/types'
 import type { Category } from './category.types'
-import { tryAuthenticate } from '@aiszlab/relax/next'
+import { tryAuthenticate } from '@/utils/authentication'
+import { AUTHENTICATION_TOKEN } from '@/constants/authentication'
 
 const mergePaginated = <T>(
   existing: Partialable<Paginated<T>>,
@@ -75,16 +76,16 @@ const client = new ApolloClient({
     createHttpLink({
       uri: 'https://api.fantufantu.com',
       fetch: async (uri, options) => {
-        const _authenticated = await tryAuthenticate().catch(() => null)
-        const _headers = new Headers(options?.headers)
+        const authenticated = await tryAuthenticate().catch(() => null)
+        const headers = new Headers(options?.headers)
 
-        if (_authenticated) {
-          _headers.append('Authorization', `Bearer ${_authenticated}`)
+        if (authenticated) {
+          headers.append(AUTHENTICATION_TOKEN.authorization, `Bearer ${authenticated}`)
         }
 
         return await fetch(uri, {
           ...options,
-          headers: Array.from(_headers.entries())
+          headers: Array.from(headers.entries())
         })
       }
     })
